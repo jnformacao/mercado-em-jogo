@@ -2,210 +2,196 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Mercado em Jogo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#14213d;--card:#1f2f52;--deep:#0f1a31;--line:#34446a;--ink:#f6f4ef;--mute:#aab3c5;--or:#e07a2c;--or2:#f0a35e;--blue:#5b9be0;--bad:#ff8a80;--good:#7fd6a4;--warn:#ffd36e}
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--navy);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-text-size-adjust:100%}
 h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif;margin:0;line-height:1.1}
 p{margin:0;line-height:1.45}
-#app{max-width:1280px;margin:0 auto;padding:20px 16px 48px}
-.kick{font-size:13px;letter-spacing:2px;font-weight:700;color:var(--or2);text-transform:uppercase}
-.card{background:var(--card);border-radius:18px;padding:18px}
-.deep{background:var(--deep);border-radius:14px;padding:14px}
-.stack{display:flex;flex-direction:column;gap:14px}
-.row{display:flex;gap:14px;flex-wrap:wrap}
-.grow{flex:1;min-width:240px}
+button{font-family:inherit}
+#app{max-width:1280px;margin:0 auto;padding:16px 14px 40px}
+.phone{max-width:480px;margin:0 auto}
+.kick{font-size:12px;letter-spacing:2px;font-weight:700;color:var(--or2);text-transform:uppercase}
+.card{background:var(--card);border-radius:18px;padding:16px}
+.deep{background:var(--deep);border-radius:14px;padding:12px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.grow{flex:1;min-width:220px}
 .center{text-align:center}
-.btn{appearance:none;border:0;border-radius:14px;padding:14px 20px;font:700 17px Inter,sans-serif;cursor:pointer;background:var(--or);color:#14213d;transition:transform .1s}
+.mute{color:var(--mute)} .good{color:var(--good)} .bad{color:var(--bad)}
+.note{font-size:12px;color:var(--mute)}
+.btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;font:700 16px Inter,sans-serif;cursor:pointer;background:var(--or);color:#14213d}
 .btn:active{transform:scale(.97)}
-.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:disabled{opacity:.4;cursor:not-allowed}
 .btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
-.btn.big{font-size:20px;padding:18px 28px}
-.btn.sm{padding:10px 0;font-size:16px;flex:1;background:var(--deep);color:var(--ink);border:2px solid var(--line)}
-input[type=text]{width:100%;padding:14px 16px;border-radius:12px;border:2px solid var(--line);background:var(--deep);color:var(--ink);font:600 20px Inter,sans-serif}
+.btn.dark{background:var(--deep);color:var(--ink);border:2px solid var(--line)}
+.btn.big{font-size:19px;padding:16px 24px}
+.btn.sm{padding:8px 12px;font-size:14px}
+input[type=text]{width:100%;padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--deep);color:var(--ink);font:600 19px Inter,sans-serif}
 input:focus{outline:none;border-color:var(--or2)}
-input[type=range]{width:100%;accent-color:var(--or);height:32px}
-.mute{color:var(--mute)} .good{color:var(--good)} .bad{color:var(--bad)} .warnc{color:var(--warn)}
-.big-num{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:40px}
-.price{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:52px;text-align:center}
-.opt{display:flex;gap:12px;align-items:center;padding:12px 14px;border:2px solid var(--line);border-radius:14px;cursor:pointer;background:var(--deep)}
-.opt .ic{font-size:30px}
-.opt.sel{border-color:var(--or2);background:#2a3a62}
-.opt input{display:none}
-.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.kpi{background:var(--deep);border-radius:12px;padding:12px}
-.kpi span{font-size:13px;color:var(--mute)}
-.kpi b{display:block;font-size:21px;margin-top:4px}
-.tag{display:inline-block;padding:6px 12px;border-radius:999px;font-weight:700;font-size:15px}
-.thermo{position:relative;height:16px;border-radius:8px;background:linear-gradient(90deg,#c0392b 0%,#c0392b var(--a),#e0a13a var(--a),#e0a13a var(--b),#3fa66b var(--b),#3fa66b var(--c),#5b9be0 var(--c),#5b9be0 var(--d),#7d5bd0 var(--d))}
-.thermo i{position:absolute;top:-6px;width:6px;height:28px;border-radius:3px;background:#fff;box-shadow:0 0 0 2px #14213d;transform:translateX(-3px)}
-table{width:100%;border-collapse:collapse}
-th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);font-size:18px}
-th{color:var(--mute);font-size:13px;letter-spacing:1px;text-transform:uppercase}
-td.n,th.n{text-align:right}
-.bar{height:10px;border-radius:5px;background:var(--good);min-width:2px}
-.bar.neg{background:var(--bad)}
-.timer{height:12px;background:var(--deep);border-radius:6px;overflow:hidden}
-.timer i{display:block;height:100%;background:var(--or);transition:width .25s linear}
-.chip{display:inline-block;padding:6px 12px;border-radius:999px;background:var(--deep);margin:4px;font-size:16px}
+.big-num{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:38px}
+/* HUD */
+.hud{display:grid;grid-template-columns:1.3fr .9fr 1.3fr .8fr;gap:6px;position:sticky;top:0;z-index:5;background:var(--navy);padding:6px 0}
+.hc{background:var(--deep);border-radius:10px;padding:6px 8px}
+.hc span{display:block;font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:.5px}
+.hc b{font-size:15px;white-space:nowrap}
+.tbar{height:6px;background:var(--deep);border-radius:3px;overflow:hidden;margin:4px 0 8px}
+.tbar i{display:block;height:100%;background:var(--or);width:0}
+.macro{display:flex;gap:10px;align-items:center;background:#1c2b45;border-left:5px solid var(--blue);border-radius:10px;padding:8px 10px;font-size:13px;margin-bottom:6px}
+.macro .ic{font-size:24px}
+.advisor{display:flex;gap:8px;align-items:flex-start;background:#2b2a1c;border-left:5px solid var(--warn);border-radius:10px;padding:8px 10px;font-size:13px;min-height:40px;margin-bottom:8px}
+.mapwrap{border-radius:18px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+#map{display:block;width:100%;height:auto;touch-action:manipulation;user-select:none}
+.bld{cursor:pointer}
+.bld:active .halo{fill:rgba(255,255,255,.55)}
+.lbl{font:700 9px Inter,sans-serif;fill:#14213d}
+.evbar{display:flex;gap:10px;align-items:center;background:var(--or);color:#14213d;border-radius:12px;padding:10px 12px;margin-top:8px;font-weight:700;cursor:pointer;animation:pulse 1.2s infinite}
+.evbar .ic{font-size:28px}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(240,163,94,.6)}50%{box-shadow:0 0 0 8px rgba(240,163,94,0)}}
+.hidden{display:none!important}
+.dock{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.step{background:var(--card);border-radius:14px;padding:10px;text-align:center}
+.step>span{font-size:12px;color:var(--mute)}
+.sr{display:flex;align-items:center;justify-content:space-between;gap:6px;margin:4px 0}
+.sr b{font-family:"Space Grotesk",Inter,sans-serif;font-size:19px;white-space:nowrap}
+.sr button{flex:none;width:38px;height:38px;border-radius:10px;border:2px solid var(--line);background:var(--deep);color:var(--ink);font-size:22px;font-weight:700;cursor:pointer}
+.tag{display:inline-block;padding:3px 8px;border-radius:999px;font-weight:700;font-size:11px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.stats div{background:var(--deep);border-radius:10px;padding:6px;text-align:center;font-size:10px;color:var(--mute)}
+.stats b{display:block;font-size:15px;color:var(--ink)}
+/* Sheet */
+.sheet{position:fixed;inset:0;background:rgba(5,10,20,.55);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet-in{background:var(--card);width:100%;max-width:480px;max-height:82vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px 16px 26px;animation:up .25s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.kv{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.kv b{white-space:nowrap}
+.opt{display:block;width:100%;text-align:left;background:var(--deep);border:2px solid var(--line);color:var(--ink);border-radius:12px;padding:12px;font:600 15px Inter,sans-serif;cursor:pointer;margin-top:8px}
+.opt:active{border-color:var(--or2)}
+.tip{background:#2b2a1c;border-left:5px solid var(--warn);border-radius:10px;padding:10px;font-size:13px}
+.seg{display:flex;gap:6px}
+.seg button{flex:1}
+.seg button.on{background:var(--or);color:#14213d;border-color:var(--or)}
+/* toasts */
+#toasts{position:fixed;top:68px;left:50%;transform:translateX(-50%);z-index:30;display:flex;flex-direction:column;gap:6px;width:min(460px,94vw);pointer-events:none}
+.toast{background:rgba(11,20,38,.94);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13px;box-shadow:0 6px 18px rgba(0,0,0,.4);animation:up .25s ease-out;pointer-events:none}
+.toast.rep{border-color:var(--or2)}
+.wf{display:flex;justify-content:space-between;font-size:12px;padding:2px 0}
+.wf b{white-space:nowrap;margin-left:8px}
+/* host */
+.host h1{font-size:48px}
+.lots{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.lot{background:#6fa83d;border-radius:14px;padding:10px;color:#14213d;position:relative;box-shadow:inset 0 -6px 0 rgba(0,0,0,.15)}
+.lot .bi{font-size:44px;line-height:1}
+.lot .nm{font-weight:800;font-size:19px;margin-top:4px;word-break:break-word}
+.lot .val{font-weight:800;font-size:24px}
+.lot .sub{font-size:14px}
+.lot.neg{background:#c26a4a}
+.rank li{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line);font-size:17px}
+.rank{list-style:none;margin:0;padding:0}
+.chip{display:inline-block;padding:6px 12px;border-radius:999px;background:var(--deep);margin:4px;font-size:15px}
 .chip.ok{background:#2c5a3f}
-#qr{background:#fff;padding:14px;border-radius:14px;display:inline-block}
+#qr{background:#fff;padding:12px;border-radius:14px;display:inline-block}
 #qr img,#qr canvas{display:block}
-.link{word-break:break-all;font-size:15px}
-.tip{background:#2b2a1c;border-left:6px solid var(--warn);border-radius:12px;padding:12px 14px}
-.lesson{background:#1c2b45;border-left:6px solid var(--blue);border-radius:12px;padding:14px 16px}
-.badge{display:flex;gap:10px;align-items:center;background:var(--deep);border-radius:14px;padding:12px 14px}
-.badge .ic{font-size:30px}
-.wf{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--line);font-size:16px}
-.wf>*:last-child{white-space:nowrap;margin-left:10px}
-.wf.tot{font-weight:700;border-bottom:none;font-size:18px}
-.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.steps3 .deep{text-align:center}
-.steps3 .ic{font-size:34px}
 .podium{display:flex;align-items:flex-end;justify-content:center;gap:16px;margin-top:16px}
-.step{width:220px;border-radius:16px 16px 0 0;display:flex;flex-direction:column;align-items:center;padding:16px 10px;text-align:center;animation:rise .9s ease-out both}
-.step .pos{font-family:"Space Grotesk";font-size:56px;font-weight:700}
-.step .nm{font-size:22px;font-weight:700;margin-top:6px;word-break:break-word}
-.step .val{font-size:18px;margin-top:6px}
+.stepP{width:210px;border-radius:16px 16px 0 0;display:flex;flex-direction:column;align-items:center;padding:16px 10px;text-align:center;animation:rise .9s ease-out both;color:#14213d}
+.stepP .pos{font-family:"Space Grotesk";font-size:52px;font-weight:700}
+.stepP .nm{font-size:21px;font-weight:700;margin-top:6px;word-break:break-word}
 @keyframes rise{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
-@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
-.pop{animation:pop .5s ease-out both}
-.confetti{position:fixed;top:-20px;font-size:24px;pointer-events:none;animation:fall linear forwards;z-index:9}
+.badge{display:flex;gap:10px;align-items:center;background:var(--deep);border-radius:14px;padding:12px 14px}
+.badge .ic{font-size:28px}
+.confetti{position:fixed;top:-20px;font-size:24px;pointer-events:none;animation:fall linear forwards;z-index:40}
 @keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
-.host h1{font-size:54px}
-.host .scen{font-size:24px}
-.note{font-size:13px;color:var(--mute)}
 .warnbox{background:#4a2a12;border-radius:12px;padding:12px 16px;color:#ffd7b3}
-.ticker{font-size:15px;color:var(--mute);min-height:44px}
-@media (max-width:640px){.host h1{font-size:34px}.big-num{font-size:30px}th,td{font-size:14px;padding:7px}.steps3{grid-template-columns:1fr}.price{font-size:44px}}
+.news{background:#1c2b45;border-left:6px solid var(--blue);border-radius:14px;padding:14px 18px;display:flex;gap:14px;align-items:center}
+.news .ic{font-size:44px}
+@media (max-width:640px){.host h1{font-size:32px}}
 </style>
 </head>
 <body>
 <div id="app"><p class="mute">Carregando…</p></div>
+<div id="toasts"></div>
 
 <script>
-/* ===== Regras do jogo (ajuste aqui se quiser) ===== */
-const CFG = {
-  rounds: 5,          // número de rodadas
-  secs: 90,           // segundos por rodada
-  fixed: 10000,       // custos fixos por rodada (R$)
-  varPct: 0.18,       // tributos (10%) + despesas variáveis (8%) sobre o preço
-  pref: 1500,         // preço de referência do mercado (R$)
-  perPlayer: 80       // tamanho do mercado: sensores por empresa por rodada
+/* =====================================================================
+   CONFIGURAÇÃO DO JOGO (ajuste aqui)
+   ===================================================================== */
+const G = {
+  months: 12,          // meses do jogo
+  monthMs: 50000,      // duração de cada mês (50 s → 12 meses = 10 min)
+  cycles: 10,          // ciclos por mês (1 ciclo = 5 s)
+  startCash: 60000,    // caixa inicial
+  startRaw: 40,        // matéria-prima inicial (unidades)
+  startFG: 20,         // sensores prontos no estoque
+  convCost: 200,       // custo de transformação por sensor (energia, mão de obra)
+  varPct: 0.18,        // tributos (10%) + despesas variáveis (8%) sobre a receita
+  admin: 12000,        // despesas fixas mensais (aluguel, administração)
+  engCost: 3000,       // salário mensal de um engenheiro de vendas
+  truckCost: 1500,     // custo mensal de cada caminhão
+  truckPrice: 18000,   // preço de compra de um caminhão
+  capUpCost: 30000,    // ampliação da fábrica
+  capUp: 40,           // +sensores/mês por ampliação
+  baseDemand: 60,      // clientes por mês no preço de referência
+  pref: 1500,          // preço de referência do mercado
+  capStart: 80,        // capacidade inicial (sensores/mês)
+  overdraft: 0.08      // juros do cheque especial ao mês
 };
-// beta = sensibilidade a preço; val = peso do valor demonstrado; out = força da alternativa do cliente; dem = tamanho do mercado
-const SCEN = [
-  {ic:"📈", t:"Mercado normal", d:"Clientes comparam preço e valor de forma equilibrada.", cv:800, beta:4, val:1, out:0.5, dem:1,
-   tip:"Comece perto do preço de referência (R$ 1.500) e observe o que a concorrência faz.",
-   lesson:"Preço é sinal: quem cobrou muito acima da referência perdeu clientes; quem cobrou muito abaixo deixou margem na mesa."},
-  {ic:"🔩", t:"O aço subiu", d:"Seu custo variável passou de R$ 800 para R$ 920 por sensor.", cv:920, beta:4, val:1, out:0.5, dem:1,
-   tip:"Seu piso subiu para R$ 1.122. Repassar parte do aumento ao preço protege a margem.",
-   lesson:"Choque de custo desloca a oferta para a esquerda: todos repassam um pouco e o preço de equilíbrio sobe."},
-  {ic:"🚢", t:"Chegou um importado barato", d:"Um concorrente estrangeiro entrou vendendo barato. Clientes ficaram mais sensíveis a preço.", cv:920, beta:6, val:0.6, out:1.1, dem:1,
-   tip:"Demanda elástica: subir preço agora derruba vendas. Ações de valor rendem menos nesta rodada.",
-   lesson:"Com substitutos baratos, a demanda fica elástica. Perder pouco também é boa gestão."},
-  {ic:"🏭", t:"Cliente técnico exige TCO", d:"Grandes indústrias querem ver o custo total de propriedade antes de comprar.", cv:850, beta:2.5, val:1.8, out:0.5, dem:1,
-   tip:"Valor demonstrado pesa muito. O estudo de TCO pode justificar um preço premium.",
-   lesson:"Engenharia de vendas eleva o teto: provar economia ao cliente reduz a sensibilidade a preço."},
-  {ic:"🏦", t:"Juros altos", d:"Crédito caro: muitos clientes adiaram compras e o mercado encolheu 30%.", cv:850, beta:5, val:1, out:0.5, dem:0.7,
-   tip:"Mercado menor: fica mais difícil atingir o ponto de equilíbrio. Cuidado com gastos caros.",
-   lesson:"Com menos volume, os custos fixos pesam mais: margem de contribuição e controle de gastos decidem o jogo."}
-];
-const ES = [
-  {ic:"📄", n:"Só a tabela de preços", s:"Sem custo extra. Cliente decide quase só pelo preço.", c:0, v:0},
-  {ic:"🤝", n:"Visita técnica", s:"Engenheiro configura a solução. +25% de atratividade.", c:2000, v:0.25},
-  {ic:"📊", n:"Estudo de TCO + demo", s:"Prova economia e payback. +60% de atratividade.", c:5000, v:0.6}
-];
-const FACTS = [
-  "💡 Margem de contribuição = preço − tributos e despesas variáveis − custo variável.",
-  "💡 Ponto de equilíbrio = custos fixos ÷ margem de contribuição por unidade.",
-  "💡 Abaixo do piso, cada venda aumenta o prejuízo, por mais clientes que você ganhe.",
-  "💡 Demanda elástica: uma pequena alta de preço derruba muito as vendas.",
-  "💡 Engenharia de vendas transforma especificação técnica em valor econômico para o cliente.",
-  "💡 Dar 10% de desconto pode exigir 30% ou mais de volume para manter o mesmo lucro.",
-  "💡 TCO = custo total de propriedade: preço + energia + manutenção ao longo da vida útil."
-];
+const CYCLE_MS = G.monthMs / G.cycles;
+const TOTAL_MS = G.months * G.monthMs;
+// Estoques valem menos que o custo se ficarem parados (valor de liquidação no fim do jogo)
+const STOCK_VALUE = 0.6;
+const INIT = G.startCash + (G.startRaw * 600 + G.startFG * (600 + G.convCost)) * STOCK_VALUE;
 
-/* ===== Utilitários ===== */
+// Economia da cidade: muda em alguns meses (igual para todos os jogadores)
+const MACRO = [
+  {m:0,  ic:"📈", t:"Mercado aberto",          d:"Clientes comparam preço e valor. Encontre o seu ponto de equilíbrio.",                 beta:3,   dem:1,    mp:600, rate:0.03, val:1,   shift:0},
+  {m:2,  ic:"🔩", t:"O aço subiu 15%",         d:"Matéria-prima passa de R$ 600 para R$ 690. Repassar ao preço ou absorver na margem?",   beta:3,   dem:1,    mp:690, rate:0.03, val:1,   shift:0},
+  {m:4,  ic:"🏦", t:"Juros altos",             d:"Crédito caro: clientes adiam compras (−20%) e o banco cobra 6% ao mês.",                beta:3,   dem:0.8,  mp:690, rate:0.06, val:1,   shift:0},
+  {m:6,  ic:"🚢", t:"Chegou um importado barato", d:"Concorrente estrangeiro vende a R$ 1.350. Clientes ficaram mais sensíveis a preço.", beta:5,   dem:0.9,  mp:650, rate:0.05, val:0.7, shift:-150},
+  {m:8,  ic:"🏭", t:"Indústria aquecida",      d:"Fábricas da região cresceram: demanda +30%. Valor demonstrado pesa mais.",              beta:3,   dem:1.3,  mp:650, rate:0.04, val:1.2, shift:0},
+  {m:10, ic:"🎄", t:"Pedidos de fim de ano",   d:"Clientes garantem estoque antes das férias: demanda +15%.",                             beta:2.5, dem:1.15, mp:620, rate:0.04, val:1.2, shift:0}
+];
+const macroAt = m => { let c = MACRO[0]; for (const e of MACRO) if (e.m <= m) c = e; return c; };
+
+// Mapa (coordenadas no SVG 360 × 310)
+const AV = 160; // avenida principal (y)
+const B = {
+  sup:{x:42, y:52,  ic:"⛏️", n:"Fornecedor"},
+  arm:{x:108,y:108, ic:"📦", n:"Armazém"},
+  fab:{x:182,y:98,  ic:"🏭", n:"Sua fábrica", big:true},
+  com:{x:258,y:104, ic:"🏢", n:"Comercial"},
+  gar:{x:108,y:214, ic:"🚚", n:"Garagem"},
+  ban:{x:258,y:216, ic:"🏦", n:"Banco"},
+  c0: {x:322,y:48,  ic:"🏘️", n:"Bairro", cli:true},
+  c1: {x:330,y:232, ic:"🏬", n:"Comércio", cli:true},
+  c2: {x:200,y:278, ic:"🏗️", n:"Construtora", cli:true},
+  c3: {x:40, y:270, ic:"🏭", n:"Indústria", cli:true}
+};
+const CLIENTS = ["c0","c1","c2","c3"];
+const TREES = [[20,140],[76,40],[150,40],[228,46],[296,140],[60,188],[150,250],[300,290],[340,110],[96,290],[226,250],[20,214]];
+
+/* =====================================================================
+   UTILITÁRIOS
+   ===================================================================== */
 const app = document.getElementById('app');
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const brl = n => (n < 0 ? '−' : '') + 'R$ ' + Math.abs(Math.round(n)).toLocaleString('pt-BR');
+const brlK = n => { const a = Math.abs(n); const s = a >= 1e6 ? (a/1e6).toFixed(2).replace('.', ',') + ' mi' : a >= 1e4 ? Math.round(a/1000) + ' mil' : a >= 1000 ? (a/1000).toFixed(1).replace('.', ',') + ' mil' : Math.round(a); return (n < 0 ? '−' : '') + 'R$ ' + s; };
+const pct = v => (v * 100).toFixed(0) + '%';
 const cls = n => n < 0 ? 'bad' : 'good';
 const rnd = n => Math.random().toString(36).slice(2, 2 + n);
+const ri = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
 const store = {get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 const baseUrl = () => location.origin + location.pathname;
-const piso = cv => cv / (1 - CFG.varPct);
-const attr = (price, es, sc) => (1 + ES[es].v * sc.val) * Math.exp(-sc.beta * (price - CFG.pref) / CFG.pref);
-
-function zone(p, sc){
-  const pi = piso(sc.cv), mcp = (p * (1 - CFG.varPct) - sc.cv) / p;
-  if (p < pi) return {ic:"🚨", t:"Prejuízo em cada venda", c:"#c0392b", fg:"#fff"};
-  if (mcp < 0.2) return {ic:"⚠️", t:"Margem apertada", c:"#e0a13a", fg:"#14213d"};
-  if (p <= CFG.pref * 1.15) return {ic:"✅", t:"Preço competitivo", c:"#3fa66b", fg:"#fff"};
-  if (p <= CFG.pref * 1.35) return {ic:"💎", t:"Premium: precisa provar valor", c:"#5b9be0", fg:"#14213d"};
-  return {ic:"🚀", t:"Muito caro: poucos clientes", c:"#7d5bd0", fg:"#fff"};
-}
-
-/* ===== Modelo de mercado ===== */
-function market(decs, sc){
-  const N = decs.length;
-  const M = CFG.perPlayer * N * sc.dem;
-  const A = decs.map(p => attr(p.price, p.es, sc));
-  const sum = A.reduce((a, b) => a + b, 0) + sc.out * N;
-  return decs.map((p, i) => {
-    const q = Math.round(M * A[i] / sum);
-    const mcu = p.price * (1 - CFG.varPct) - sc.cv;
-    const lucro = q * mcu - CFG.fixed - ES[p.es].c;
-    return {pid:p.pid, price:p.price, es:p.es, auto:!!p.auto, q, mcu, rev:q * p.price, mc:q * mcu, lucro, cv:sc.cv, esc:ES[p.es].c};
-  });
-}
-// previsão para o jogador: concorrentes repetem a média da rodada anterior
-function forecast(price, es, sc, ref){
-  const n = Math.max(2, ref.n || 2);
-  const M = CFG.perPlayer * n * sc.dem;
-  const mine = attr(price, es, sc);
-  const others = (n - 1) * (1 + (ref.v || 0) * sc.val) * Math.exp(-sc.beta * ((ref.avg || CFG.pref) - CFG.pref) / CFG.pref);
-  const q = Math.round(M * mine / (mine + others + sc.out * n));
-  const mcu = price * (1 - CFG.varPct) - sc.cv;
-  return {q, lucro:q * mcu - CFG.fixed - ES[es].c};
-}
-function tip(r){
-  if (r.mcu <= 0) return "🚨 Preço abaixo do piso: cada sensor vendido aumentou o prejuízo.";
-  if (r.lucro < 0 && r.price > CFG.pref * 1.15) return "📉 Preço alto afastou clientes: o volume não cobriu os custos fixos.";
-  if (r.lucro < 0) return "😬 A margem total não cobriu os custos fixos e a ação comercial.";
-  if (r.mcu / r.price < 0.25) return "👍 Lucro positivo, mas com margem apertada: pouco espaço para imprevistos.";
-  return "🎉 Margem e volume cobriram os custos fixos e geraram lucro!";
-}
-function badgesFor(res){
-  const out = {}; const add = (pid, b) => (out[pid] = out[pid] || []).push(b);
-  const by = (f) => res.slice().sort((a, b) => f(b) - f(a))[0];
-  if (!res.length) return out;
-  add(by(r => r.lucro).pid, {ic:"💰", t:"Maior lucro da rodada"});
-  add(by(r => r.q).pid, {ic:"🧲", t:"Ímã de clientes"});
-  add(by(r => r.mcu / r.price).pid, {ic:"🛡️", t:"Margem de ferro"});
-  res.forEach(r => { if (r.es === 2 && r.lucro > 0) add(r.pid, {ic:"📊", t:"Valor provado: TCO com lucro"}); });
-  res.forEach(r => { if (r.mcu <= 0) add(r.pid, {ic:"🚨", t:"Abaixo do piso"}); });
-  return out;
-}
-
-/* ===== Carregar PeerJS e QR ===== */
-function loadScript(src){return new Promise((ok, no) => {const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.head.appendChild(s);});}
-async function loadLibs(){
-  if (!window.Peer){
-    for (const u of ["https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js","https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"]){
-      try { await loadScript(u); if (window.Peer) break; } catch(e){}
-    }
-  }
-  if (!window.QRCode){
-    for (const u of ["https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js","https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"]){
-      try { await loadScript(u); if (window.QRCode) break; } catch(e){}
-    }
-  }
+const pisoOf = (mp, conv) => (mp + conv) / (1 - G.varPct);
+function toast(html, ms, cl){
+  const t = document.createElement('div'); t.className = 'toast ' + (cl || ''); t.innerHTML = html;
+  $('toasts').appendChild(t); setTimeout(() => t.remove(), ms || 3500);
+  const all = $('toasts').children; if (all.length > 3) all[0].remove();
 }
 function confetti(){
   const em = ['🎉','✨','🏆','💰','🎊'];
@@ -215,531 +201,855 @@ function confetti(){
     document.body.appendChild(s); setTimeout(() => s.remove(), 7000);
   }
 }
-
-/* ===================================================== */
-/* ===================  APRESENTADOR  ================== */
-/* ===================================================== */
-const H = {code:null, peer:null, players:{}, round:-1, phase:'lobby', timer:null, endsAt:0, results:[], badges:{}, ref:{avg:CFG.pref, v:0, n:2}};
-
-function hostPlayers(){ return Object.values(H.players); }
-function ranking(){ return hostPlayers().slice().sort((a, b) => b.total - a.total); }
-function sendTo(p, msg){ if (p.conn && p.conn.open){ try { p.conn.send(msg); } catch(e){} } }
-
-function startHost(){
-  if (!window.Peer){ app.innerHTML = `<div class="card stack"><h2>Não foi possível carregar a conexão</h2><p class="mute">Verifique a internet do computador e recarregue a página.</p></div>`; return; }
-  H.code = rnd(4).toUpperCase();
-  app.innerHTML = `<div class="card"><p>Abrindo a sala…</p></div>`;
-  try { H.peer = new Peer('mercado-jogo-' + H.code.toLowerCase()); } catch(e){ blockedMsg(); return; }
-  const myPeer = H.peer;
-  setTimeout(() => { if (H.peer === myPeer && !myPeer.open && H.phase === 'lobby') blockedMsg(); }, 12000);
-  H.peer.on('open', () => renderLobby());
-  H.peer.on('connection', conn => {
-    conn.on('data', d => hostData(conn, d));
-    conn.on('close', () => { const p = H.players[conn._pid]; if (p && p.conn === conn){ p.online = false; refreshHost(); } });
-  });
-  H.peer.on('disconnected', () => { try { H.peer.reconnect(); } catch(e){} });
-  H.peer.on('error', e => {
-    if (e.type === 'unavailable-id'){ H.peer.destroy(); startHost(); return; }
-    if (H.phase === 'lobby' && !H.peer.open) app.innerHTML = `<div class="card stack"><h2>Erro ao abrir a sala</h2><p class="mute">${esc(e.type)}. Verifique a internet e recarregue.</p></div>`;
-  });
+function loadScript(src){return new Promise((ok, no) => {const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.head.appendChild(s);});}
+async function loadLibs(){
+  if (!window.Peer) for (const u of ["https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js","https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"]) { try { await loadScript(u); if (window.Peer) break; } catch(e){} }
+  if (!window.QRCode) for (const u of ["https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js","https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"]) { try { await loadScript(u); if (window.QRCode) break; } catch(e){} }
 }
 function blockedMsg(){
   app.innerHTML = `<div class="card stack" style="max-width:640px;margin:40px auto">
-    <h2>Não consegui abrir a sala</h2>
-    <p>Este navegador ou esta rede bloqueou a conexão do jogo. Isso acontece em pré-visualizações (como a do app do Claude) ou em redes que bloqueiam conexões diretas.</p>
-    <p class="mute">Abra o endereço publicado no Chrome, Edge ou Safari. Se a rede bloquear, teste pelo 4G.</p>
+    <h2>Não consegui conectar</h2>
+    <p>Este navegador ou esta rede bloqueou a conexão do jogo (acontece em pré-visualizações de apps ou em redes que bloqueiam conexões diretas).</p>
+    <p class="mute">Abra o endereço do jogo no Chrome, Edge ou Safari. Se a rede bloquear, use o 4G.</p>
     <button class="btn" onclick="location.reload()">Tentar de novo</button></div>`;
 }
 
-function hostData(conn, d){
-  if (!d || typeof d !== 'object') return;
-  if (d.type === 'join'){
-    const pid = String(d.pid || '').slice(0, 40); if (!pid) return;
-    let p = H.players[pid];
-    if (!p){
-      if (H.phase === 'final') { try { conn.send({type:'closed'}); } catch(e){} return; }
-      const name = String(d.name || '').trim().slice(0, 24) || 'Empresa';
-      p = H.players[pid] = {pid, name, total:0, last:{price:CFG.pref, es:0}, dec:null, hist:[], prevPos:0, badges:[]};
+/* =====================================================================
+   SIMULAÇÃO DA EMPRESA (roda no celular de cada jogador)
+   ===================================================================== */
+let S = null;
+function newState(){
+  return {cash:G.startCash, raw:G.startRaw, fg:G.startFG, price:G.pref, prod:60, cap:G.capStart, eng:0, trucks:1, debt:0, rep:1,
+    auto:true, lot:50, conv:G.convCost, cert:false, assets:0,
+    orders:[], inbound:[], receivables:[], broken:0, strike:0, fair:0, demo:0, comp:0,
+    gc:-1, prodAcc:0, demAcc:0, lostWhy:'', lastProd:0,
+    m:newMonth(), hist:[], sold:0, lost:0, recTot:0,
+    nextEv:3, ev:null, evDeadline:0, deck:[], done:false, avg:null};
+}
+function newMonth(){ return {rec:0, ded:0, cpv:0, fixed:0, jur:0, evc:0, extra:0, sold:0, lost:0}; }
+const curMonth = () => Math.max(0, Math.min(G.months - 1, Math.floor(Math.max(0, S.gc) / G.cycles)));
+function equity(){
+  const mp = macroAt(curMonth()).mp;
+  return S.cash - S.debt + (S.raw * mp + S.inbound.reduce((a, b) => a + b.qty * b.cost, 0) + S.fg * (mp + S.conv)) * STOCK_VALUE + S.assets;
+}
+const result = () => equity() - INIT;
+
+function monthlyDemand(){
+  const mac = macroAt(curMonth());
+  const ref = G.pref + mac.shift;
+  const pm = S.avg || S.price;
+  const anchor = 0.5 * pm + 0.5 * ref;
+  const v = 1 + 0.2 * S.eng * mac.val + (S.fair > 0 ? 0.25 : 0) + (S.cert ? 0.15 * mac.val : 0) + (S.demo > 0 ? 0.15 : 0);
+  let d = G.baseDemand * mac.dem * S.rep * v * Math.exp(-mac.beta * (S.price - anchor) / G.pref);
+  if (S.comp > 0) d *= 0.85;
+  return Math.max(0, Math.min(250, d));
+}
+
+function buyRaw(qty, unit, delay){
+  S.cash -= qty * unit;
+  S.inbound.push({qty, cost:unit, at:S.gc + delay});
+  FX.drive('🚛', route(edge('sup'), B.arm), Math.min(9000, delay * CYCLE_MS * 0.9));
+}
+function sell(q, p, cli){
+  const mac = macroAt(curMonth());
+  const rev = q * p;
+  S.cash += rev * (1 - G.varPct);
+  S.m.rec += rev; S.m.ded += rev * G.varPct; S.m.cpv += q * (mac.mp + S.conv);
+  S.sold += q; S.m.sold += q; S.recTot += rev;
+  const c = B[cli] || B.c2;
+  FX.drive('🚚', route(B.fab, c), 2600, () => FX.float(c.x, c.y - 22, '+' + brlK(rev * (1 - G.varPct)), '#1b5e20'));
+}
+function spend(v){ S.cash -= v; S.m.evc += v; }
+function gain(v){ S.cash += v; S.m.extra += v; }
+
+function cycle(){
+  S.gc++;
+  const gc = S.gc, month = curMonth(), mac = macroAt(month);
+  // chegada de matéria-prima
+  S.inbound = S.inbound.filter(b => { if (b.at <= gc){ S.raw += b.qty; FX.float(B.arm.x, B.arm.y - 24, '+' + b.qty + ' MP', '#0d47a1'); return false; } return true; });
+  // recebíveis de eventos
+  S.receivables = S.receivables.filter(r => {
+    if (r.at <= gc){
+      if (Math.random() < r.p){ gain(r.v); toast(`💳 ${esc(r.who)} pagou ${brl(r.v)}!`); FX.float(B.ban.x, B.ban.y - 24, '+' + brlK(r.v), '#1b5e20'); }
+      else toast(`😞 Calote: ${esc(r.who)} não pagou os ${brl(r.v)}.`, 5000);
+      return false;
+    } return true;
+  });
+  // compra automática
+  const need = Math.min(S.prod, S.cap) / G.cycles * 4;
+  const pipe = S.raw + S.inbound.reduce((a, b) => a + b.qty, 0);
+  if (S.auto && S.prod > 0 && pipe < need) buyRaw(S.lot, mac.mp, 2);
+  // produção
+  const capNow = S.cap * (S.broken > 0 ? 0.5 : 1);
+  S.prodAcc += Math.min(S.prod, capNow) / G.cycles;
+  let n = Math.floor(S.prodAcc);
+  if (n > S.raw){ n = S.raw; S.prodAcc = Math.min(S.prodAcc - n, 1); } else S.prodAcc -= n;
+  S.raw -= n; S.fg += n; S.cash -= n * S.conv; S.lastProd = n;
+  if (n > 0) FX.puff();
+  if (S.broken > 0) S.broken--;
+  // pedidos dos clientes
+  S.demAcc += monthlyDemand() / G.cycles;
+  while (S.demAcc >= 1){
+    const q = Math.min(Math.floor(S.demAcc), ri(2, 6));
+    S.demAcc -= q;
+    S.orders.push({q, c:CLIENTS[ri(0, CLIENTS.length - 1)], ttl:2});
+  }
+  // entregas (cada caminhão faz 2 viagens por ciclo)
+  let trips = S.strike > 0 ? 0 : S.trucks * 2;
+  if (S.strike > 0) S.strike--;
+  const keep = [];
+  for (const o of S.orders){
+    if (trips > 0 && S.fg >= o.q){ trips--; S.fg -= o.q; sell(o.q, S.price, o.c); }
+    else {
+      o.ttl--;
+      if (o.ttl < 0){
+        S.lost += o.q; S.m.lost += o.q; S.rep = Math.max(0.6, S.rep - 0.015);
+        S.lostWhy = (trips <= 0 && S.fg >= o.q) ? 'truck' : 'stock';
+        FX.float(B[o.c].x, B[o.c].y - 22, '😠 −' + o.q, '#b71c1c');
+      } else keep.push(o);
     }
-    p.conn = conn; p.online = true; conn._pid = pid;
-    sendTo(p, {type:'welcome', name:p.name});
-    syncPlayer(p); refreshHost();
-  } else if (d.type === 'decision'){
-    const p = H.players[conn._pid];
-    if (!p || H.phase !== 'round' || d.round !== H.round) return;
-    let price = Number(d.price); if (!isFinite(price)) return;
-    price = Math.min(4000, Math.max(500, Math.round(price)));
-    const es = [0, 1, 2].includes(d.es) ? d.es : 0;
-    p.dec = {price, es};
-    sendTo(p, {type:'ack', price, es});
-    refreshHost();
-    if (hostPlayers().every(x => x.dec)) endRound();
   }
+  S.orders = keep;
+  if (S.comp > 0) S.comp--;
+  if (S.demo > 0) S.demo--;
+  // fechamento do mês
+  if (gc % G.cycles === G.cycles - 1) closeMonth(month, mac);
+  // eventos
+  if (!S.ev && gc >= S.nextEv && gc < G.months * G.cycles - 2) spawnEvent();
+  if (gc >= G.months * G.cycles - 1) finishGame();
 }
 
-function syncPlayer(p){
-  if (H.phase === 'lobby') sendTo(p, {type:'lobby'});
-  else if (H.phase === 'round'){
-    const secs = Math.max(0, Math.round((H.endsAt - Date.now()) / 1000));
-    sendTo(p, {type:'round', round:H.round, secs, last:p.last, done:p.dec, ref:H.ref});
-  } else if (H.phase === 'results'){
-    const r = H.results.find(x => x.pid === p.pid);
-    const rk = ranking(); const pos = rk.indexOf(p) + 1;
-    if (r) sendTo(p, {type:'result', round:H.round, r, pos, prevPos:p.prevPos, n:rk.length, total:p.total, badges:H.badges[p.pid] || [], last:H.round === CFG.rounds - 1});
-    else sendTo(p, {type:'lobby'});
-  } else if (H.phase === 'final'){
-    const rk = ranking(); const pos = rk.indexOf(p) + 1;
-    sendTo(p, {type:'final', pos, n:rk.length, total:p.total, podium:rk.slice(0, 3).map(x => ({name:x.name, total:x.total})), awards:awardsFor(p)});
+function closeMonth(month, mac){
+  const fixed = G.admin + S.eng * G.engCost + S.trucks * G.truckCost;
+  const jur = S.debt * mac.rate + (S.cash < 0 ? -S.cash * G.overdraft : 0);
+  S.cash -= fixed + jur;
+  const m = S.m; m.fixed = fixed; m.jur = jur;
+  m.lucro = m.rec - m.ded - m.cpv - m.fixed - m.jur - m.evc + m.extra;
+  m.month = month;
+  S.hist.push(m);
+  if (m.lost === 0) S.rep = Math.min(1.3, S.rep + 0.03);
+  if (S.fair > 0) S.fair--;
+  S.lostWhy = '';
+  S.m = newMonth();
+  toast(`<b>📅 Mês ${month + 1} fechado</b>
+    <div class="wf"><span>Receita (${m.sold} sensores)</span><b>${brl(m.rec)}</b></div>
+    <div class="wf"><span>(−) Tributos e despesas 18%</span><b class="bad">${brl(-m.ded)}</b></div>
+    <div class="wf"><span>(−) Custo dos produtos vendidos</span><b class="bad">${brl(-m.cpv)}</b></div>
+    <div class="wf"><span>(−) Despesas fixas</span><b class="bad">${brl(-m.fixed)}</b></div>
+    ${m.jur ? `<div class="wf"><span>(−) Juros</span><b class="bad">${brl(-m.jur)}</b></div>` : ''}
+    ${m.evc || m.extra ? `<div class="wf"><span>(±) Decisões e eventos</span><b>${brl(m.extra - m.evc)}</b></div>` : ''}
+    <div class="wf" style="border-top:1px solid var(--line);margin-top:4px;padding-top:4px"><span><b>= Lucro do mês</b></span><b class="${cls(m.lucro)}">${brl(m.lucro)}</b></div>
+    ${m.lost ? `<p class="note">😠 ${m.lost} sensores em pedidos perdidos</p>` : ''}`, 6000, 'rep');
+}
+
+/* ----- Eventos que chegam pelo mapa ----- */
+const EVENTS = [
+  {id:'sup', who:'🚛', name:'Siderúrgica Nova', at:'arm',
+   text:() => `Tenho 100 unidades de matéria-prima por R$ 480 cada (o preço normal é ${brl(macroAt(curMonth()).mp)}). Pagamento à vista de R$ 48.000, entrega em 3 ciclos.`,
+   tip:'Comprar barato reduz o custo variável e aumenta a margem, mas prende dinheiro em estoque.',
+   opts:[{t:'Comprar o lote (R$ 48.000)', f:() => { buyRaw(100, 480, 3); toast('📦 Lote barato a caminho!'); }},
+         {t:'Recusar', f:() => {}}], def:1},
+  {id:'big', who:'🏗️', name:'Construtora Horizonte', at:'c2',
+   text:() => `Preciso de 25 sensores agora e pago R$ 1.250 cada. Topa?`,
+   tip:() => `Seu piso hoje é ${brl(pisoOf(macroAt(curMonth()).mp, S.conv))}: abaixo dele, cada venda dá prejuízo. Você tem ${S.fg} sensores prontos.`,
+   opts:[{t:'Aceitar a R$ 1.250', f:() => bigSale(25, 1250, 'c2')},
+         {t:'Contrapropor R$ 1.450', f:() => { if (Math.random() < 0.55) bigSale(25, 1450, 'c2', '🤝 A construtora aceitou a contraproposta!'); else toast('🏗️ A construtora comprou de outro fornecedor.'); }},
+         {t:'Recusar', f:() => {}}], def:2},
+  {id:'brk', who:'🔧', name:'Máquina quebrou!', at:'fab',
+   text:() => `A linha de montagem parou. O técnico cobra R$ 6.000 para consertar agora. Sem conserto, a fábrica produz pela metade durante 1 mês.`,
+   tip:'Parar a produção também custa: são vendas e clientes perdidos.',
+   opts:[{t:'Consertar agora (R$ 6.000)', f:() => spend(6000)},
+         {t:'Esperar a peça (meia produção por 1 mês)', f:() => { S.broken = G.cycles; }}], def:1},
+  {id:'fair', who:'🎪', name:'Feira da Indústria', at:'com',
+   text:() => `Estande na feira regional: R$ 5.000. Atrai +25% de clientes por 2 meses.`,
+   tip:'Investir em valor aumenta a demanda sem precisar baixar o preço.',
+   opts:[{t:'Montar estande (R$ 5.000)', f:() => { spend(5000); S.fair = 2; }}, {t:'Não ir', f:() => {}}], def:1},
+  {id:'eng', who:'🧑‍💼', name:'Engenheira de vendas', at:'com',
+   text:() => `Mariana quer trabalhar com você: salário de R$ 3.000/mês. Ela traduz especificação técnica em valor para o cliente: +20% de clientes.`,
+   tip:'Vale contratar se a margem dos clientes extras for maior que o salário.',
+   opts:[{t:'Contratar', f:() => { S.eng++; toast('🧑‍💼 Mariana entrou no time comercial!'); }}, {t:'Agora não', f:() => {}}], def:1},
+  {id:'late', who:'💳', name:'Metalúrgica Sul', at:'ban',
+   text:() => `Devemos R$ 15.000 de uma compra antiga. Podemos pagar daqui a 2 meses… ou agora, com 5% de desconto.`,
+   tip:'Contas a receber também são dinheiro: prazo e risco de calote têm custo.',
+   opts:[{t:'Receber já com 5% de desconto (R$ 14.250)', f:() => gain(14250)},
+         {t:'Esperar 2 meses (risco de calote)', f:() => S.receivables.push({v:15000, p:0.7, at:S.gc + 2 * G.cycles, who:'Metalúrgica Sul'})},
+         {t:'Cobrança judicial (R$ 2.000; recebe em 3 meses)', f:() => { spend(2000); S.receivables.push({v:15000, p:0.95, at:S.gc + 3 * G.cycles, who:'Metalúrgica Sul'}); }}], def:1},
+  {id:'strike', who:'✊', name:'Greve dos caminhoneiros', at:'gar',
+   text:() => `As entregas vão parar por 3 ciclos. Uma transportadora cobra R$ 4.000 para manter tudo rodando.`,
+   tip:'Pedidos que esperam mais de 2 ciclos são perdidos e a reputação cai.',
+   opts:[{t:'Contratar transportadora (R$ 4.000)', f:() => spend(4000)}, {t:'Esperar a greve', f:() => { S.strike = 3; }}], def:1},
+  {id:'comp', who:'📉', name:'Concorrente em liquidação', at:'com',
+   text:() => `Uma rival baixou os preços e vai tirar 15% dos seus clientes durante 1 mês. Como reagir?`,
+   tip:'Guerra de preço derruba a margem de todos. Mostrar valor é outra saída.',
+   opts:[{t:'Baixar meu preço em 10%', f:() => { S.comp = G.cycles; S.price = Math.round(S.price * 0.9 / 10) * 10; }},
+         {t:'Demonstração técnica (R$ 2.000)', f:() => { S.comp = G.cycles; spend(2000); S.demo = G.cycles; }},
+         {t:'Manter tudo como está', f:() => { S.comp = G.cycles; }}], def:2},
+  {id:'truck', who:'🚚', name:'Concessionária', at:'gar',
+   text:() => `Caminhão seminovo por ${brl(G.truckPrice)} (mais ${brl(G.truckCost)}/mês). Cada caminhão faz 2 entregas por ciclo.`,
+   tip:'Logística também limita vendas: sem caminhão livre, o pedido espera e pode ser perdido.',
+   opts:[{t:`Comprar (${brl(G.truckPrice)})`, f:() => buyTruck()}, {t:'Não preciso', f:() => {}}], def:1},
+  {id:'iso', who:'🔬', name:'Auditor de qualidade', at:'fab', cond:() => !S.cert,
+   text:() => `Certificação de qualidade por R$ 8.000. Clientes técnicos valorizam: +15% de clientes até o fim do jogo.`,
+   tip:'Diferenciação aumenta o poder de preço da empresa.',
+   opts:[{t:'Certificar (R$ 8.000)', f:() => { spend(8000); S.cert = true; toast('🔬 Fábrica certificada!'); }}, {t:'Agora não', f:() => {}}], def:1},
+  {id:'bank', who:'🏦', name:'Gerente do banco', at:'ban',
+   text:() => `Ofereço uma linha de crédito de R$ 30.000 a ${pct(macroAt(curMonth()).rate)} ao mês.`,
+   tip:'Dívida financia estoque e expansão, mas os juros saem do lucro todo mês.',
+   opts:[{t:'Aceitar R$ 30.000', f:() => { S.debt += 30000; S.cash += 30000; }}, {t:'Não, obrigado', f:() => {}}], def:1},
+  {id:'solar', who:'⚡', name:'Companhia de energia', at:'fab',
+   text:() => `A tarifa subiu: cada sensor vai custar +R$ 40 para produzir. Painéis solares custam R$ 15.000 e reduzem R$ 60 por sensor.`,
+   tip:'Pense em TCO: em quantos sensores os painéis se pagam?',
+   opts:[{t:'Instalar painéis (R$ 15.000)', f:() => { S.cash -= 15000; S.assets += 7500; S.conv = Math.max(100, S.conv - 20); }},
+         {t:'Aceitar o aumento', f:() => { S.conv += 40; }}], def:1},
+  {id:'exp', who:'👷', name:'Empreiteira', at:'fab',
+   text:() => `Posso ampliar sua fábrica em +${G.capUp} sensores/mês por ${brl(G.capUpCost)}. Hoje a capacidade é ${S.cap}.`,
+   tip:'Ampliar só compensa se houver clientes para a produção extra.',
+   opts:[{t:`Ampliar (${brl(G.capUpCost)})`, f:() => expand()}, {t:'Agora não', f:() => {}}], def:1}
+];
+function bigSale(q, p, cli, msg){
+  const n = Math.min(q, S.fg);
+  if (n < q){ S.rep = Math.max(0.6, S.rep - 0.05); toast(`😕 Só havia ${n} sensores prontos: cliente insatisfeito.`); }
+  if (n > 0){ S.fg -= n; sell(n, p, cli); }
+  if (msg) toast(msg);
+}
+function buyTruck(){ S.cash -= G.truckPrice; S.assets += G.truckPrice / 2; S.trucks++; toast('🚚 Novo caminhão na garagem!'); }
+function sellTruck(){ if (S.trucks <= 1) return; S.cash += G.truckPrice / 2; S.assets = Math.max(0, S.assets - G.truckPrice / 2); S.trucks--; }
+function expand(){ S.cash -= G.capUpCost; S.assets += G.capUpCost / 2; S.cap += G.capUp; toast(`🏗️ Fábrica ampliada: ${S.cap} sensores/mês`); }
+
+function spawnEvent(){
+  if (!S.deck.length) S.deck = EVENTS.map((e, i) => i).sort(() => Math.random() - 0.5);
+  let ev = null;
+  while (S.deck.length && !ev){ const e = EVENTS[S.deck.shift()]; if (!e.cond || e.cond()) ev = e; }
+  if (!ev) return;
+  S.ev = ev; S.evDeadline = Date.now() + 30000;
+  FX.drive(ev.who, route(edge(ev.at), B[ev.at]), 2500);
+  UI.dirty = true;
+}
+function resolveEvent(i, auto){
+  const ev = S.ev; if (!ev) return;
+  const o = ev.opts[i];
+  S.ev = null; S.nextEv = S.gc + ri(5, 7);
+  o.f();
+  if (auto) toast(`⏱ Sem resposta para ${ev.who} ${esc(ev.name)}: "${esc(o.t)}".`);
+  UI.closeSheet(); UI.dirty = true;
+}
+function finishGame(){
+  if (S.done) return; S.done = true;
+  P.sendStat();
+  UI.showEnd();
+}
+
+/* =====================================================================
+   ANIMAÇÕES DO MAPA
+   ===================================================================== */
+function edge(k){ const b = B[k]; return {x: b.x < 180 ? -14 : 374, y: AV}; }
+function route(a, b){ return [{x:a.x, y:a.y}, {x:a.x, y:AV}, {x:b.x, y:AV}, {x:b.x, y:b.y}]; }
+const FX = {
+  movers: [],
+  layer(){ return $('fx'); },
+  drive(emoji, pts, dur, done){
+    const L = this.layer(); if (!L) { if (done) done(); return; }
+    const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.textContent = emoji; t.setAttribute('font-size', '20'); t.setAttribute('text-anchor', 'middle'); t.setAttribute('dominant-baseline', 'central');
+    L.appendChild(t);
+    const seg = []; let tot = 0;
+    for (let i = 1; i < pts.length; i++){ const d = Math.hypot(pts[i].x - pts[i-1].x, pts[i].y - pts[i-1].y); seg.push(d); tot += d; }
+    this.movers.push({el:t, pts, seg, tot, t0:performance.now(), dur, done});
+    this.run();
+  },
+  float(x, y, txt, col){
+    const L = this.layer(); if (!L) return;
+    const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.textContent = txt; t.setAttribute('x', x); t.setAttribute('y', y); t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('font-size', '11'); t.setAttribute('font-weight', '800'); t.setAttribute('fill', col || '#14213d');
+    t.setAttribute('stroke', '#fff'); t.setAttribute('stroke-width', '3'); t.setAttribute('paint-order', 'stroke');
+    L.appendChild(t);
+    this.movers.push({el:t, float:true, x, y, t0:performance.now(), dur:1600});
+    this.run();
+  },
+  puff(){
+    if (Math.random() < 0.5) return;
+    this.float(B.fab.x + 14, B.fab.y - 30, '💨', '#555');
+  },
+  running:false,
+  run(){
+    if (this.running) return; this.running = true;
+    const step = now => {
+      this.movers = this.movers.filter(m => {
+        const k = Math.min(1, (now - m.t0) / m.dur);
+        if (m.float){
+          m.el.setAttribute('y', m.y - 26 * k); m.el.setAttribute('opacity', String(1 - k * k));
+        } else {
+          let d = k * m.tot, i = 0;
+          while (i < m.seg.length - 1 && d > m.seg[i]){ d -= m.seg[i]; i++; }
+          const a = m.pts[i], b = m.pts[i + 1], r = m.seg[i] ? d / m.seg[i] : 1;
+          const x = a.x + (b.x - a.x) * r, y = a.y + (b.y - a.y) * r;
+          m.el.setAttribute('x', x); m.el.setAttribute('y', y - 6);
+          m.el.setAttribute('transform', b.x > a.x ? `scale(-1,1) translate(${-2 * x},0)` : '');
+        }
+        if (k >= 1){ m.el.remove(); if (m.done) m.done(); return false; }
+        return true;
+      });
+      if (this.movers.length) requestAnimationFrame(step); else this.running = false;
+    };
+    requestAnimationFrame(step);
   }
+};
+
+function mapSVG(name){
+  const road = (d, w) => `<path d="${d}" stroke="#5f6670" stroke-width="${w || 14}" fill="none" stroke-linecap="round"/>`;
+  let roads = road(`M-10 ${AV} H370`, 18) + `<path d="M-10 ${AV} H370" stroke="#f5d547" stroke-width="1.5" stroke-dasharray="7 7" fill="none"/>`;
+  for (const k in B){ roads += road(`M${B[k].x} ${B[k].y} V${AV}`, 10); }
+  let trees = TREES.map(([x, y]) => `<text x="${x}" y="${y}" font-size="16" text-anchor="middle">🌳</text>`).join('');
+  let blds = '';
+  for (const k in B){
+    const b = B[k], r = b.big ? 30 : 23, fs = b.big ? 38 : 28;
+    const label = k === 'fab' ? name : b.n;
+    const w = Math.max(44, label.length * 5.6 + 10);
+    blds += `<g class="bld" data-k="${k}">
+      <circle class="halo" cx="${b.x}" cy="${b.y}" r="${r}" fill="${b.big ? 'rgba(255,214,110,.75)' : 'rgba(255,255,255,.35)'}" stroke="${b.big ? '#e07a2c' : 'rgba(255,255,255,.7)'}" stroke-width="2"/>
+      <text x="${b.x}" y="${b.y + 1}" font-size="${fs}" text-anchor="middle" dominant-baseline="central">${b.ic}</text>
+      <rect x="${b.x - w / 2}" y="${b.y + r - 4}" width="${w}" height="13" rx="6" fill="rgba(255,255,255,.9)"/>
+      <text class="lbl" x="${b.x}" y="${b.y + r + 6}" text-anchor="middle">${esc(label)}</text>
+      <text id="bd-${k}" x="${b.x + r - 2}" y="${b.y - r + 6}" font-size="13" font-weight="800" text-anchor="middle"></text>
+    </g>`;
+  }
+  return `<svg id="map" viewBox="0 0 360 310" xmlns="http://www.w3.org/2000/svg">
+    <rect width="360" height="310" fill="#7cb342"/>
+    <rect width="360" height="310" fill="url(#gr)" opacity=".25"/>
+    <defs><pattern id="gr" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.2" fill="#33691e"/></pattern></defs>
+    <ellipse cx="300" cy="182" rx="22" ry="9" fill="#4fc3f7" opacity=".85"/>
+    ${roads}${trees}${blds}<g id="fx"></g></svg>`;
 }
 
-function addBots(){
-  ['Robô Alfa', 'Robô Beta', 'Robô Gama'].forEach(n => {
-    const pid = 'bot-' + rnd(6);
-    H.players[pid] = {pid, name:n, bot:true, online:true, total:0, last:{price:CFG.pref, es:0}, dec:null, hist:[], prevPos:0, badges:[]};
-  });
-  refreshHost();
-}
-
-function startRound(){
-  if (!hostPlayers().length) return;
-  H.round++; H.phase = 'round';
-  const rk = ranking(); hostPlayers().forEach(p => p.prevPos = H.round > 0 ? rk.indexOf(p) + 1 : 0);
-  H.ref.n = Math.max(2, hostPlayers().length);
-  hostPlayers().forEach(p => {
-    p.dec = null;
-    if (p.bot){ const sc = SCEN[H.round]; p.dec = {price:Math.round((piso(sc.cv) * 1.25 + Math.random() * 700) / 10) * 10, es:Math.floor(Math.random() * 3)}; }
-  });
-  H.endsAt = Date.now() + CFG.secs * 1000;
-  hostPlayers().forEach(syncPlayer);
-  renderHostRound();
-  clearInterval(H.timer);
-  H.timer = setInterval(() => { if (Date.now() >= H.endsAt) endRound(); else updateHostTimer(); }, 250);
-}
-
-function endRound(){
-  if (H.phase !== 'round') return;
-  clearInterval(H.timer);
-  const list = hostPlayers();
-  const decs = list.map(p => { const d = p.dec || p.last; p.last = {price:d.price, es:d.es}; return {pid:p.pid, price:d.price, es:d.es, auto:!p.dec}; });
-  H.results = market(decs, SCEN[H.round]);
-  H.results.forEach(r => { const p = H.players[r.pid]; p.total += r.lucro; p.hist.push(r); });
-  H.badges = badgesFor(H.results);
-  Object.entries(H.badges).forEach(([pid, bs]) => { if (H.players[pid]) H.players[pid].badges.push(...bs); });
-  H.ref = {avg:decs.reduce((a, x) => a + x.price, 0) / decs.length, v:decs.reduce((a, x) => a + ES[x.es].v, 0) / decs.length, n:Math.max(2, decs.length)};
-  H.phase = 'results';
-  list.forEach(syncPlayer);
-  renderHostResults();
-}
-
-function awardsList(){
-  const ps = hostPlayers().filter(p => p.hist.length); if (!ps.length) return [];
-  const top = f => ps.slice().sort((a, b) => f(b) - f(a))[0];
-  const vol = top(p => p.hist.reduce((a, r) => a + r.q, 0));
-  const mar = top(p => p.hist.reduce((a, r) => a + r.mcu / r.price, 0) / p.hist.length);
-  const con = top(p => p.hist.filter(r => r.lucro > 0).length * 1e6 + p.total);
-  const eng = top(p => p.hist.filter(r => r.es > 0 && r.lucro > 0).length * 1e6 + p.total);
-  return [
-    {pid:vol.pid, ic:"🧲", t:"Rei do volume", s:vol.hist.reduce((a, r) => a + r.q, 0) + " sensores vendidos"},
-    {pid:mar.pid, ic:"🛡️", t:"Margem de ouro", s:"maior margem de contribuição média"},
-    {pid:con.pid, ic:"📆", t:"Consistência", s:con.hist.filter(r => r.lucro > 0).length + " de " + con.hist.length + " rodadas com lucro"},
-    {pid:eng.pid, ic:"🤝", t:"Engenharia de vendas", s:"mais ações comerciais que deram lucro"}
-  ];
-}
-function awardsFor(p){ return awardsList().filter(a => a.pid === p.pid).map(a => ({ic:a.ic, t:a.t, s:a.s})); }
-
-function showPodium(){ H.phase = 'final'; hostPlayers().forEach(syncPlayer); renderPodium(); }
-
-function resetGame(){
-  H.round = -1; H.phase = 'lobby'; H.results = []; H.badges = {}; H.ref = {avg:CFG.pref, v:0, n:2};
-  hostPlayers().forEach(p => { if (p.bot) delete H.players[p.pid]; else { p.total = 0; p.hist = []; p.dec = null; p.badges = []; p.prevPos = 0; p.last = {price:CFG.pref, es:0}; } });
-  hostPlayers().forEach(syncPlayer); renderLobby();
-}
-
-function refreshHost(){
-  if (H.phase === 'lobby') renderLobby();
-  else if (H.phase === 'round') renderHostStatus();
-}
-
-/* ----- Telas do apresentador ----- */
-function renderLobby(){
-  const link = baseUrl() + '?sala=' + H.code;
-  const ps = hostPlayers();
-  app.innerHTML = `
-  <div class="host stack">
-    <p class="kick">Mercado em Jogo · Sala ${esc(H.code)}</p>
-    <h1>Você é dono de uma fábrica de sensores. Quem lucra mais?</h1>
-    ${location.protocol === 'file:' ? `<p class="warnbox">Arquivo aberto direto do computador: publique-o na internet para os celulares entrarem.</p>` : ''}
-    <div class="row">
-      <div class="card stack" style="align-items:center;min-width:300px">
-        <p class="kick">Aponte a câmera do celular</p>
-        <div id="qr"></div>
-        <p class="link mute">${esc(link)}</p>
-        <p>Código: <b style="font-size:30px;letter-spacing:4px">${esc(H.code)}</b></p>
+/* =====================================================================
+   INTERFACE DO JOGADOR
+   ===================================================================== */
+const UI = {
+  dirty:true, sheetK:null, timer:null,
+  build(){
+    app.innerHTML = `
+    <div class="phone">
+      <div class="hud">
+        <div class="hc"><span>💰 Caixa</span><b id="hCash"></b></div>
+        <div class="hc"><span>📅 Mês</span><b id="hMonth"></b></div>
+        <div class="hc"><span>📈 Lucro</span><b id="hRes"></b></div>
+        <div class="hc"><span>🏆 Lugar</span><b id="hRank">–</b></div>
       </div>
-      <div class="card stack grow">
-        <div class="steps3">
-          <div class="deep stack"><span class="ic">🏷️</span><b>Defina o preço</b><span class="mute">Alto dá margem, baixo dá clientes</span></div>
-          <div class="deep stack"><span class="ic">🤝</span><b>Escolha a ação de vendas</b><span class="mute">Provar valor custa, mas atrai clientes</span></div>
-          <div class="deep stack"><span class="ic">💰</span><b>Lucre mais</b><span class="mute">${CFG.rounds} rodadas, 5 cenários diferentes</span></div>
-        </div>
-        <h3>Empresas no jogo (${ps.length})</h3>
-        <div>${ps.map(p => `<span class="chip ${p.online ? 'ok' : ''} pop">${p.bot ? '🤖' : '🏭'} ${esc(p.name)}</span>`).join('') || '<span class="mute">Aguardando jogadores…</span>'}</div>
-        <div class="row">
-          <button class="btn big" id="go" ${ps.length ? '' : 'disabled'}>▶ Começar jogo</button>
-          <button class="btn ghost" id="bots">+ 3 robôs (teste)</button>
-        </div>
+      <div class="tbar"><i id="hBar"></i></div>
+      <div class="macro" id="macro"></div>
+      <div class="advisor" id="advisor"></div>
+      <div class="mapwrap">${mapSVG(P.name)}</div>
+      <div class="evbar hidden" id="evbar"></div>
+      <div class="dock">
+        <div class="step"><span>🏷️ Preço do sensor</span><div class="sr"><button data-a="p-">−</button><b id="dPrice"></b><button data-a="p+">+</button></div><span class="tag" id="dZone"></span></div>
+        <div class="step"><span>🏭 Produção por mês</span><div class="sr"><button data-a="q-">−</button><b id="dProd"></b><button data-a="q+">+</button></div><span class="note" id="dCap"></span></div>
       </div>
+      <div class="stats" id="stats"></div>
+      <div class="row" style="margin-top:8px;gap:8px"><button class="btn dark sm" style="flex:1" id="bRep">📊 Relatórios</button><button class="btn dark sm" style="flex:1" id="bHelp">❓ Como jogar</button></div>
+      <p class="note center" style="margin-top:8px">Toque nos prédios do mapa para administrar cada área.</p>
     </div>
-  </div>`;
-  $('go').onclick = startRound;
-  $('bots').onclick = addBots;
-  const q = $('qr');
-  if (window.QRCode){ try { new QRCode(q, {text:link, width:250, height:250, correctLevel:QRCode.CorrectLevel.M}); } catch(e){ q.style.display = 'none'; } }
-  else q.style.display = 'none';
-}
-
-function renderHostRound(){
-  const sc = SCEN[H.round];
-  app.innerHTML = `
-  <div class="host stack">
-    <div class="row" style="justify-content:space-between;align-items:center"><p class="kick">Rodada ${H.round + 1} de ${CFG.rounds}</p><span class="big-num" id="tleft"></span></div>
-    <div class="timer"><i id="tbar" style="width:100%"></i></div>
-    <h1 class="pop">${sc.ic} ${esc(sc.t)}</h1>
-    <p class="scen">${esc(sc.d)}</p>
-    <div class="tip"><b>💡 Dica do consultor:</b> ${esc(sc.tip)}</div>
-    <div class="row">
-      <div class="card grow stack">
-        <h3>Números da rodada</h3>
-        <div class="kpis">
-          <div class="kpi"><span>Custo variável</span><b>${brl(sc.cv)} / sensor</b></div>
-          <div class="kpi"><span>Piso (margem zero)</span><b>${brl(piso(sc.cv))}</b></div>
-          <div class="kpi"><span>Custos fixos</span><b>${brl(CFG.fixed)}</b></div>
-          <div class="kpi"><span>Preço médio anterior</span><b>${brl(H.ref.avg)}</b></div>
-        </div>
+    <div id="sheet" class="sheet hidden"><div class="sheet-in" id="sheetIn"></div></div>`;
+    document.querySelectorAll('.bld').forEach(g => g.addEventListener('click', () => this.openSheet(g.dataset.k)));
+    document.querySelectorAll('[data-a]').forEach(b => b.addEventListener('click', () => this.act(b.dataset.a)));
+    $('evbar').onclick = () => this.openSheet('ev');
+    $('bRep').onclick = () => this.openSheet('rep');
+    $('bHelp').onclick = () => this.openSheet('help');
+    $('sheet').addEventListener('click', e => { if (e.target.id === 'sheet') this.closeSheet(); });
+    clearInterval(this.timer); this.timer = setInterval(() => this.render(), 300);
+    this.render();
+  },
+  act(a){
+    if (!S || S.done) return;
+    if (a === 'p-') S.price = Math.max(600, S.price - 50);
+    if (a === 'p+') S.price = Math.min(3500, S.price + 50);
+    if (a === 'q-') S.prod = Math.max(0, S.prod - 10);
+    if (a === 'q+') S.prod = Math.min(S.cap, S.prod + 10);
+    this.dirty = true; this.render();
+    if (this.sheetK) this.fillSheet();
+  },
+  zone(){
+    const mac = macroAt(curMonth()), pi = pisoOf(mac.mp, S.conv), p = S.price;
+    const mcp = (p * (1 - G.varPct) - mac.mp - S.conv) / p;
+    if (p < pi) return {t:'🚨 Prejuízo por venda', c:'#c0392b', f:'#fff'};
+    if (mcp < 0.2) return {t:'⚠️ Margem apertada', c:'#e0a13a', f:'#14213d'};
+    if (p <= (G.pref + mac.shift) * 1.15) return {t:'✅ Competitivo', c:'#3fa66b', f:'#fff'};
+    if (p <= (G.pref + mac.shift) * 1.35) return {t:'💎 Premium', c:'#5b9be0', f:'#14213d'};
+    return {t:'🚀 Muito caro', c:'#7d5bd0', f:'#fff'};
+  },
+  advice(){
+    const mac = macroAt(curMonth()), pi = pisoOf(mac.mp, S.conv), D = monthlyDemand();
+    if (S.cash < 0) return '🏦 Caixa negativo! O cheque especial cobra 8% ao mês. Pegue um empréstimo no Banco ou venda mais.';
+    if (S.price < pi) return `🚨 Seu preço está abaixo do piso (${brl(pi)}): cada venda dá prejuízo.`;
+    if (S.broken > 0) return '🔧 Máquina quebrada: produção pela metade até o conserto.';
+    if (S.strike > 0) return '✊ Greve: as entregas estão paradas.';
+    if (S.lostWhy === 'truck') return '🚚 Pedidos esperando caminhão! Compre mais um na Garagem.';
+    if (S.lostWhy === 'stock') return '📦 Faltou produto para entregar: aumente a produção.';
+    if (!S.auto && S.raw < S.prod / 3) return '⛏️ Matéria-prima acabando: compre no Armazém.';
+    if (S.prod > 0 && S.raw === 0 && S.inbound.length === 0) return '⛏️ Sem matéria-prima: a fábrica está parada!';
+    if (S.fg > D * 1.5 && S.fg > 40) return '🧊 Estoque parado é dinheiro parado: reduza a produção ou o preço.';
+    if (S.prod > D * 1.3 && D > 0) return `📉 Você produz ${S.prod}/mês, mas os clientes querem uns ${Math.round(D)}.`;
+    if (D > S.cap * 0.95) return '🏗️ Há mais clientes do que sua fábrica produz: amplie a fábrica ou suba o preço.';
+    if (S.ev) return `${S.ev.who} ${S.ev.name} está esperando você no mapa.`;
+    return '💡 ' + mac.d;
+  },
+  render(){
+    if (!S || !$('hCash')) return;
+    const el = P.elapsed(), month = curMonth(), mac = macroAt(month);
+    $('hCash').textContent = brlK(S.cash); $('hCash').className = cls(S.cash);
+    $('hMonth').textContent = (month + 1) + '/' + G.months;
+    const res = result(); $('hRes').textContent = brlK(res); $('hRes').className = cls(res);
+    $('hRank').textContent = P.rank ? P.rank + 'º/' + P.n : '–';
+    $('hBar').style.width = Math.min(100, 100 * el / TOTAL_MS) + '%';
+    $('macro').innerHTML = `<span class="ic">${mac.ic}</span><div><b>${esc(mac.t)}</b><br><span class="mute">Matéria-prima ${brl(mac.mp)} · juros ${pct(mac.rate)}/mês</span></div>`;
+    $('advisor').innerHTML = `<span>🧑‍🏫</span><span>${esc(this.advice())}</span>`;
+    $('dPrice').textContent = brl(S.price);
+    const z = this.zone(); $('dZone').textContent = z.t; $('dZone').style.background = z.c; $('dZone').style.color = z.f;
+    $('dProd').textContent = S.prod;
+    $('dCap').textContent = 'capacidade ' + S.cap + (S.broken > 0 ? ' (quebrada)' : '');
+    const pend = S.orders.reduce((a, o) => a + o.q, 0);
+    $('stats').innerHTML = `<div>⛏️ Matéria-prima<b>${S.raw}</b></div><div>📦 Prontos<b>${S.fg}</b></div><div>🧾 Pedidos<b>${pend}</b></div><div>⭐ Reputação<b>${Math.min(100, Math.round(S.rep * 100))}%</b></div>`;
+    // marcadores no mapa
+    const byC = {}; S.orders.forEach(o => byC[o.c] = (byC[o.c] || 0) + o.q);
+    for (const k in B){
+      const t = $('bd-' + k); if (!t) continue;
+      let s = '';
+      if (B[k].cli && byC[k]) s = '🧾' + byC[k];
+      if (S.ev && S.ev.at === k) s = '❗';
+      if (k === 'fab' && S.broken > 0 && !(S.ev && S.ev.at === 'fab')) s = '🔧';
+      if (k === 'gar' && S.strike > 0) s = '✊';
+      t.textContent = s;
+    }
+    // evento
+    const eb = $('evbar');
+    if (S.ev && !S.done){
+      const left = Math.max(0, Math.ceil((S.evDeadline - Date.now()) / 1000));
+      eb.classList.remove('hidden');
+      eb.innerHTML = `<span class="ic">${S.ev.who}</span><span style="flex:1">${esc(S.ev.name)} chegou! Toque para decidir</span><span>⏱${left}s</span>`;
+      if (left <= 0) resolveEvent(S.ev.def, true);
+    } else eb.classList.add('hidden');
+    if (this.sheetK && this.dirty && this.sheetK !== 'ev') this.fillSheet();
+    this.dirty = false;
+  },
+  openSheet(k){
+    if (!S || S.done) return;
+    if (k === 'ev' && !S.ev) return;
+    if (S.ev && S.ev.at === k) k = 'ev';
+    if (B[k] && B[k].cli) k = 'cli';
+    this.sheetK = k; $('sheet').classList.remove('hidden'); this.fillSheet();
+  },
+  closeSheet(){ this.sheetK = null; const s = $('sheet'); if (s) s.classList.add('hidden'); },
+  fillSheet(){
+    const k = this.sheetK, el = $('sheetIn'); if (!k || !el) return;
+    const mac = macroAt(curMonth()), D = monthlyDemand(), pi = pisoOf(mac.mp, S.conv);
+    const mcu = S.price * (1 - G.varPct) - mac.mp - S.conv;
+    const fixedM = G.admin + S.eng * G.engCost + S.trucks * G.truckCost;
+    const kv = (a, b, c) => `<div class="kv"><span>${a}</span><b class="${c || ''}">${b}</b></div>`;
+    const close = `<button class="btn ghost" style="width:100%;margin-top:12px" data-x="close">Fechar</button>`;
+    let h = '';
+    if (k === 'ev'){
+      const ev = S.ev; if (!ev){ this.closeSheet(); return; }
+      const tip = typeof ev.tip === 'function' ? ev.tip() : ev.tip;
+      h = `<div class="row" style="align-items:center"><span style="font-size:44px">${ev.who}</span><div><p class="kick">Chegou no mapa</p><h2>${esc(ev.name)}</h2></div></div>
+        <p style="margin-top:10px;font-size:16px">"${esc(ev.text())}"</p>
+        ${ev.opts.map((o, i) => `<button class="opt" data-ev="${i}">${esc(o.t)}</button>`).join('')}
+        <div class="tip" style="margin-top:12px">🧑‍🏫 ${esc(tip)}</div>
+        <p class="note" style="margin-top:8px">Sem resposta em 30 s: "${esc(ev.opts[ev.def].t)}".</p>`;
+    } else if (k === 'fab'){
+      h = `<h2>🏭 ${esc(P.name)}</h2><p class="mute">Transforma matéria-prima em sensores.</p>
+        ${kv('Capacidade', S.cap + ' sensores/mês')}${kv('Produção planejada', S.prod + ' sensores/mês')}
+        ${kv('Custo por sensor', brl(mac.mp) + ' matéria-prima + ' + brl(S.conv) + ' produção')}
+        ${kv('Produzidos no último ciclo', S.lastProd)}
+        ${S.broken > 0 ? kv('Situação', '🔧 meia produção', 'bad') : ''}${S.cert ? kv('Certificação', '🔬 sim', 'good') : ''}
+        <div class="row" style="margin-top:12px;gap:8px"><button class="btn dark" style="flex:1" data-x="q-">− 10/mês</button><button class="btn dark" style="flex:1" data-x="q+">+ 10/mês</button></div>
+        <button class="btn" style="width:100%;margin-top:8px" data-x="exp">🏗️ Ampliar +${G.capUp}/mês (${brl(G.capUpCost)})</button>
+        <div class="tip" style="margin-top:12px">🧑‍🏫 Produzir mais do que vende acumula estoque e prende caixa. Produzir menos perde clientes.</div>`;
+    } else if (k === 'arm' || k === 'sup'){
+      const inb = S.inbound.reduce((a, b) => a + b.qty, 0);
+      h = `<h2>📦 Armazém</h2><p class="mute">Matéria-prima do fornecedor. Cada sensor usa 1 unidade.</p>
+        ${kv('Em estoque', S.raw + ' un.')}${kv('A caminho', inb + ' un.')}${kv('Preço do fornecedor', brl(mac.mp) + '/un.')}${kv('Sensores prontos', S.fg)}
+        <p style="margin-top:12px;font-weight:700">Compra automática</p>
+        <div class="seg" style="margin-top:6px"><button class="btn dark sm ${S.auto ? 'on' : ''}" data-x="auto1">Ligada</button><button class="btn dark sm ${!S.auto ? 'on' : ''}" data-x="auto0">Desligada</button></div>
+        <p style="margin-top:12px;font-weight:700">Comprar agora (chega em 2 ciclos)</p>
+        <div class="seg" style="margin-top:6px">${[20, 50, 100].map(q => `<button class="btn dark sm" data-x="buy${q}">${q} un.<br><span class="note">${brlK(q * mac.mp)}</span></button>`).join('')}</div>
+        <p style="margin-top:12px;font-weight:700">Tamanho do lote automático</p>
+        <div class="seg" style="margin-top:6px">${[20, 50, 100].map(q => `<button class="btn dark sm ${S.lot === q ? 'on' : ''}" data-x="lot${q}">${q}</button>`).join('')}</div>
+        <div class="tip" style="margin-top:12px">🧑‍🏫 Estoque grande evita falta, mas é dinheiro parado. A compra é paga à vista.</div>`;
+    } else if (k === 'com'){
+      h = `<h2>🏢 Comercial</h2><p class="mute">Preço, margem e equipe de engenharia de vendas.</p>
+        <div class="sr" style="margin:10px 0"><button data-x="p-">−</button><b class="big-num" style="font-size:30px">${brl(S.price)}</b><button data-x="p+">+</button></div>
+        ${kv('Piso (margem zero)', brl(pi))}${kv('Margem de contribuição por sensor', brl(mcu) + ' (' + pct(mcu / S.price) + ')', cls(mcu))}
+        ${kv('Preço médio da cidade', S.avg ? brl(S.avg) : '—')}${kv('Clientes previstos', '≈ ' + Math.round(D) + ' sensores/mês')}
+        ${kv('Ponto de equilíbrio', mcu > 0 ? Math.ceil(fixedM / mcu) + ' sensores/mês' : '—')}
+        ${kv('Engenheiros de vendas', S.eng + ' (' + brl(S.eng * G.engCost) + '/mês)')}
+        <div class="row" style="margin-top:12px;gap:8px"><button class="btn" style="flex:1" data-x="eng+">🧑‍💼 Contratar (+20% clientes)</button><button class="btn dark" style="flex:1" data-x="eng-" ${S.eng ? '' : 'disabled'}>Demitir</button></div>
+        <div class="tip" style="margin-top:12px">🧑‍🏫 Preço abaixo da média da cidade atrai clientes; acima, afasta. Engenheiros de vendas mostram valor e reduzem essa sensibilidade.</div>`;
+    } else if (k === 'gar'){
+      const pend = S.orders.reduce((a, o) => a + o.q, 0);
+      h = `<h2>🚚 Garagem</h2><p class="mute">Cada caminhão faz 2 entregas por ciclo (cerca de 20 por mês).</p>
+        ${kv('Caminhões', S.trucks)}${kv('Custo da frota', brl(S.trucks * G.truckCost) + '/mês')}${kv('Pedidos esperando', pend + ' sensores')}${kv('Pedidos perdidos no jogo', S.lost, S.lost ? 'bad' : '')}
+        ${S.strike ? kv('Situação', '✊ greve', 'bad') : ''}
+        <button class="btn" style="width:100%;margin-top:12px" data-x="truck+">🚚 Comprar caminhão (${brl(G.truckPrice)})</button>
+        <button class="btn dark" style="width:100%;margin-top:8px" data-x="truck-" ${S.trucks > 1 ? '' : 'disabled'}>Vender um caminhão (${brl(G.truckPrice / 2)})</button>
+        <div class="tip" style="margin-top:12px">🧑‍🏫 Pedido que espera mais de 2 ciclos é perdido e a reputação cai.</div>`;
+    } else if (k === 'ban'){
+      h = `<h2>🏦 Banco</h2><p class="mute">Financie estoque e expansão, mas cuidado com os juros.</p>
+        ${kv('Caixa', brl(S.cash), cls(S.cash))}${kv('Dívida', brl(S.debt))}${kv('Juros do empréstimo', pct(mac.rate) + ' ao mês = ' + brl(S.debt * mac.rate))}${kv('Cheque especial (caixa negativo)', pct(G.overdraft) + ' ao mês')}
+        ${kv('Despesas fixas por mês', brl(fixedM))}
+        <div class="row" style="margin-top:12px;gap:8px"><button class="btn" style="flex:1" data-x="loan+">Pegar R$ 20.000</button><button class="btn dark" style="flex:1" data-x="loan-" ${S.debt >= 20000 && S.cash >= 20000 ? '' : 'disabled'}>Pagar R$ 20.000</button></div>
+        ${S.receivables.length ? `<p style="margin-top:12px">💳 A receber: ${S.receivables.map(r => brl(r.v)).join(', ')}</p>` : ''}
+        <div class="tip" style="margin-top:12px">🧑‍🏫 Juros entram como despesa financeira na DRE, abaixo do lucro operacional.</div>`;
+    } else if (k === 'cli'){
+      h = `<h2>🏘️ Clientes da cidade</h2>
+        ${kv('Clientes previstos neste mês', '≈ ' + Math.round(D) + ' sensores')}${kv('Seu preço x média da cidade', brl(S.price) + ' x ' + (S.avg ? brl(S.avg) : '—'))}
+        ${kv('Reputação', Math.min(100, Math.round(S.rep * 100)) + '%')}${kv('Vendidos no jogo', S.sold + ' sensores')}${kv('Perdidos no jogo', S.lost + ' sensores', S.lost ? 'bad' : '')}
+        <div class="tip" style="margin-top:12px">🧑‍🏫 Os clientes comparam seu preço com a média da cidade (elasticidade). Atrasos derrubam a reputação; entregas em dia recuperam.</div>`;
+    } else if (k === 'rep'){
+      const rows = S.hist.map(m => `<tr><td>${m.month + 1}</td><td style="text-align:right">${m.sold}</td><td style="text-align:right">${brlK(m.rec)}</td><td style="text-align:right" class="${cls(m.lucro)}">${brlK(m.lucro)}</td></tr>`).join('');
+      h = `<h2>📊 Relatórios mensais</h2>
+        ${rows ? `<table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14px"><tr class="mute"><td>Mês</td><td style="text-align:right">Vendidos</td><td style="text-align:right">Receita</td><td style="text-align:right">Lucro</td></tr>${rows}</table>` : '<p class="mute" style="margin-top:10px">O primeiro relatório sai no fim do mês 1.</p>'}
+        ${kv('Patrimônio inicial', brl(INIT))}${kv('Patrimônio atual', brl(equity()))}${kv('Resultado (lucro acumulado)', brl(result()), cls(result()))}
+        <p class="note" style="margin-top:8px">Patrimônio = caixa − dívida + estoques (60% do custo) + caminhões e ampliações (50% do valor pago).</p>`;
+    } else if (k === 'help'){
+      h = `<h2>❓ Como jogar</h2>
+        <div class="stack" style="margin-top:10px">
+          <p>🎯 <b>Objetivo:</b> terminar os 12 meses com o maior lucro acumulado da sala.</p>
+          <p>🏷️ <b>Preço:</b> preço alto dá margem e afasta clientes; abaixo do piso, cada venda dá prejuízo.</p>
+          <p>🏭 <b>Produção:</b> ajuste ao que os clientes compram. Cada sensor usa 1 unidade de matéria-prima.</p>
+          <p>🚚 <b>Entregas:</b> os pedidos (🧾 no mapa) saem de caminhão. Sem caminhão ou sem estoque, o pedido é perdido.</p>
+          <p>❗ <b>Eventos:</b> personagens chegam pelo mapa com ofertas e problemas. Toque para decidir.</p>
+          <p>🏢🏦📦 <b>Prédios:</b> toque em cada prédio para administrar vendas, banco, estoque e frota.</p>
+        </div>`;
+    }
+    el.innerHTML = h + close;
+    el.querySelectorAll('[data-x]').forEach(b => b.addEventListener('click', () => this.sheetAct(b.dataset.x)));
+    el.querySelectorAll('[data-ev]').forEach(b => b.addEventListener('click', () => resolveEvent(Number(b.dataset.ev), false)));
+  },
+  sheetAct(x){
+    if (x === 'close') return this.closeSheet();
+    if (!S || S.done) return;
+    const mac = macroAt(curMonth());
+    if (x === 'p-' || x === 'p+' || x === 'q-' || x === 'q+') return this.act(x);
+    if (x === 'exp') expand();
+    if (x === 'auto1') S.auto = true;
+    if (x === 'auto0') S.auto = false;
+    if (x.startsWith('buy')){ const q = Number(x.slice(3)); buyRaw(q, mac.mp, 2); toast(`🚛 ${q} unidades de matéria-prima a caminho`); }
+    if (x.startsWith('lot')) S.lot = Number(x.slice(3));
+    if (x === 'eng+'){ S.eng++; toast('🧑‍💼 Engenheiro de vendas contratado!'); }
+    if (x === 'eng-' && S.eng > 0) S.eng--;
+    if (x === 'truck+') buyTruck();
+    if (x === 'truck-') sellTruck();
+    if (x === 'loan+'){ S.debt += 20000; S.cash += 20000; }
+    if (x === 'loan-' && S.debt >= 20000 && S.cash >= 20000){ S.debt -= 20000; S.cash -= 20000; }
+    this.fillSheet(); this.render();
+  },
+  showEnd(){
+    clearInterval(this.timer); this.closeSheet();
+    const tot = S.hist.reduce((a, m) => a + m.rec, 0);
+    app.innerHTML = `<div class="phone stack center" style="margin-top:20px">
+      <p class="kick">Fim do jogo</p><p style="font-size:64px">🏁</p>
+      <h2 style="font-size:30px">Resultado: <span class="${cls(result())}">${brl(result())}</span></h2>
+      <div class="card stack" style="text-align:left">
+        <div class="kv"><span>Sensores vendidos</span><b>${S.sold}</b></div>
+        <div class="kv"><span>Receita total</span><b>${brl(tot)}</b></div>
+        <div class="kv"><span>Pedidos perdidos</span><b>${S.lost}</b></div>
+        <div class="kv"><span>Caixa final</span><b>${brl(S.cash)}</b></div>
+        <div class="kv"><span>Dívida</span><b>${brl(S.debt)}</b></div>
       </div>
-      <div class="card grow stack">
-        <h3>Decisões enviadas</h3>
-        <div id="status"></div>
-        <button class="btn ghost" id="end">Encerrar rodada agora</button>
-      </div>
-    </div>
-  </div>`;
-  $('end').onclick = endRound;
-  renderHostStatus(); updateHostTimer();
-}
-function renderHostStatus(){
-  const el = $('status'); if (!el) return;
-  const ps = hostPlayers(); const n = ps.filter(p => p.dec).length;
-  el.innerHTML = `<p class="big-num">${n}<span class="mute" style="font-size:24px"> / ${ps.length}</span></p>` + ps.map(p => `<span class="chip ${p.dec ? 'ok' : ''}">${p.dec ? '✓ ' : '⏳ '}${esc(p.name)}</span>`).join('');
-}
-function updateHostTimer(){
-  const left = Math.max(0, H.endsAt - Date.now());
-  const b = $('tbar'), t = $('tleft');
-  if (b) b.style.width = (100 * left / (CFG.secs * 1000)) + '%';
-  if (t) { t.textContent = '⏱ ' + Math.ceil(left / 1000) + 's'; t.style.color = left < 10000 ? 'var(--bad)' : ''; }
-}
+      <p class="mute" id="endWait">⏳ Aguardando o pódio no telão…</p>
+      <div id="endFinal"></div>
+    </div>`;
+  }
+};
 
-function renderHostResults(){
-  const sc = SCEN[H.round];
-  const rk = ranking();
-  const byPid = Object.fromEntries(H.results.map(r => [r.pid, r]));
-  const nm = pid => esc(H.players[pid].name);
-  const maxAbs = Math.max(1, ...H.results.map(r => Math.abs(r.lucro)));
-  const lastR = H.round === CFG.rounds - 1;
-  const hl = [];
-  Object.entries(H.badges).forEach(([pid, bs]) => bs.forEach(b => { if (b.ic !== '🚨') hl.push(`<div class="badge pop"><span class="ic">${b.ic}</span><div><b>${esc(b.t)}</b><br><span class="mute">${nm(pid)}</span></div></div>`); }));
-  const below = H.results.filter(r => r.mcu <= 0).length;
-  app.innerHTML = `
-  <div class="host stack">
-    <p class="kick">Resultado · Rodada ${H.round + 1} de ${CFG.rounds} · ${sc.ic} ${esc(sc.t)}</p>
-    <div class="row">${hl.slice(0, 4).join('')}${below ? `<div class="badge"><span class="ic">🚨</span><div><b>${below} empresa(s) abaixo do piso</b><br><span class="mute">venderam com prejuízo por unidade</span></div></div>` : ''}</div>
-    <div class="lesson"><b>📚 Lição da rodada:</b> ${esc(sc.lesson)}</div>
-    <div class="card" style="overflow-x:auto">
-      <table>
-        <tr><th>#</th><th>Empresa</th><th class="n">Preço</th><th>Ação</th><th class="n">Clientes</th><th class="n">MC / un.</th><th>Lucro da rodada</th><th class="n">Acumulado</th></tr>
-        ${rk.map((p, i) => { const r = byPid[p.pid]; if (!r) return ''; const mv = p.prevPos ? p.prevPos - (i + 1) : 0; return `<tr>
-          <td>${i + 1}${mv > 0 ? ' <span class="good">▲' + mv + '</span>' : mv < 0 ? ' <span class="bad">▼' + (-mv) + '</span>' : ''}</td>
-          <td><b>${esc(p.name)}</b>${r.auto ? ' <span class="note">(sem resposta)</span>' : ''}</td>
-          <td class="n">${brl(r.price)}</td><td>${ES[r.es].ic}</td><td class="n">${r.q}</td>
-          <td class="n ${cls(r.mcu)}">${brl(r.mcu)}</td>
-          <td><div class="row" style="align-items:center;gap:8px;flex-wrap:nowrap"><div class="bar ${r.lucro < 0 ? 'neg' : ''}" style="width:${Math.round(120 * Math.abs(r.lucro) / maxAbs)}px"></div><span class="${cls(r.lucro)}">${brl(r.lucro)}</span></div></td>
-          <td class="n ${cls(p.total)}"><b>${brl(p.total)}</b></td></tr>`; }).join('')}
-      </table>
-      <p class="note" style="margin-top:8px">Ações: 📄 só tabela · 🤝 visita técnica · 📊 estudo de TCO · Piso da rodada: ${brl(piso(sc.cv))} · Preço médio: ${brl(H.ref.avg)}</p>
-    </div>
-    <div class="row">${lastR ? `<button class="btn big" id="next">🏆 Ver o pódio</button>` : `<button class="btn big" id="next">▶ Próxima rodada: ${SCEN[H.round + 1].ic} ${esc(SCEN[H.round + 1].t)}</button>`}</div>
-  </div>`;
-  $('next').onclick = lastR ? showPodium : startRound;
-}
-
-function renderPodium(){
-  const rk = ranking();
-  const col = [{bg:'#c0c7d4', h:230, i:1}, {bg:'#f0a35e', h:300, i:0}, {bg:'#b07a4f', h:180, i:2}];
-  const aw = awardsList();
-  app.innerHTML = `
-  <div class="host stack center">
-    <p class="kick">Pódio final</p>
-    <h1>Quem equilibrou melhor preço, valor e margem</h1>
-    <div class="podium">
-      ${col.map((c, k) => { const p = rk[c.i]; if (!p) return ''; return `<div class="step" style="background:${c.bg};color:#14213d;height:${c.h}px;animation-delay:${[0.8, 1.6, 0][k]}s">
-        <div class="pos">${c.i + 1}º</div><div class="nm">${esc(p.name)}</div><div class="val">${brl(p.total)}</div></div>`; }).join('')}
-    </div>
-    <div class="row" style="justify-content:center">${aw.map(a => `<div class="badge pop" style="min-width:230px;text-align:left"><span class="ic">${a.ic}</span><div><b>${esc(a.t)}</b><br>${esc(H.players[a.pid].name)}<br><span class="note">${esc(a.s)}</span></div></div>`).join('')}</div>
-    <div class="card" style="text-align:left;overflow-x:auto">
-      <table><tr><th>#</th><th>Empresa</th><th class="n">Lucro acumulado</th><th class="n">Preço médio</th><th class="n">Sensores vendidos</th></tr>
-      ${rk.map((p, i) => `<tr><td>${i + 1}</td><td>${esc(p.name)}</td><td class="n ${cls(p.total)}"><b>${brl(p.total)}</b></td><td class="n">${brl(p.hist.reduce((a, r) => a + r.price, 0) / Math.max(1, p.hist.length))}</td><td class="n">${p.hist.reduce((a, r) => a + r.q, 0)}</td></tr>`).join('')}
-      </table>
-    </div>
-    <div><button class="btn ghost" id="again">↺ Jogar de novo</button></div>
-  </div>`;
-  $('again').onclick = resetGame;
-  setTimeout(confetti, 1600);
-}
-
-/* ===================================================== */
-/* =====================  JOGADOR  ===================== */
-/* ===================================================== */
-const P = {code:null, pid:null, name:'', peer:null, conn:null, tick:null, fact:null, round:-1, tries:0};
-
+/* =====================================================================
+   REDE — JOGADOR
+   ===================================================================== */
+const P = {code:null, pid:null, name:'', peer:null, conn:null, tries:0, t0:null, rank:null, n:null, statT:null, loopT:null, final:null};
+P.elapsed = () => P.t0 == null ? 0 : Date.now() - P.t0;
+P.sendStat = () => {
+  if (!S || !P.conn || !P.conn.open) return;
+  try { P.conn.send({type:'stat', price:S.price, res:Math.round(result()), cash:Math.round(S.cash), sold:S.sold, lost:S.lost, rep:S.rep, done:S.done}); } catch(e){}
+};
 function startPlayer(code){
   P.code = code.toUpperCase();
-  P.pid = store.get('mj_pid') || ('p-' + rnd(10)); store.set('mj_pid', P.pid);
-  const saved = store.get('mj_name') || '';
+  P.pid = store.get('mj2_pid') || ('p-' + rnd(10)); store.set('mj2_pid', P.pid);
+  const saved = store.get('mj2_name') || '';
   app.innerHTML = `
-  <div class="stack" style="max-width:520px;margin:0 auto">
+  <div class="phone stack" style="margin-top:20px">
     <p class="kick">Mercado em Jogo · Sala ${esc(P.code)}</p>
-    <h2 style="font-size:32px">🏭 Dê um nome à sua fábrica</h2>
+    <h2 style="font-size:30px">🏭 Dê um nome à sua empresa</h2>
     <form id="f" class="stack">
-      <input type="text" id="nm" maxlength="24" placeholder="Ex.: Sensores do João" value="${esc(saved)}" autocomplete="off">
-      <button class="btn big" type="submit">Entrar no jogo</button>
+      <input type="text" id="nm" maxlength="18" placeholder="Ex.: Sensores do João" value="${esc(saved)}" autocomplete="off">
+      <button class="btn big" type="submit">Entrar na cidade</button>
     </form>
-    <p class="mute">Você vai disputar clientes com as outras empresas da sala. Vence quem terminar com mais lucro.</p>
+    <p class="mute">Você vai administrar uma fábrica de sensores industriais por 12 meses. Vence quem terminar com mais lucro.</p>
   </div>`;
   $('f').onsubmit = e => {
     e.preventDefault();
     const n = $('nm').value.trim(); if (!n) { $('nm').focus(); return; }
-    P.name = n.slice(0, 24); store.set('mj_name', P.name);
-    playerWait('Conectando à sala…'); connect();
+    P.name = n.slice(0, 18); store.set('mj2_name', P.name);
+    playerWait('Conectando à cidade…'); connect();
   };
 }
-
 function connect(){
-  if (!window.Peer){ playerWait('Não foi possível carregar a conexão. Verifique a internet e recarregue a página.'); return; }
+  if (!window.Peer){ playerWait('Não foi possível carregar a conexão. Verifique a internet e recarregue.'); return; }
   try { if (P.peer) P.peer.destroy(); } catch(e){}
   try { P.peer = new Peer(); } catch(e){ blockedMsg(); return; }
   P.peer.on('open', () => {
-    const c = P.peer.connect('mercado-jogo-' + P.code.toLowerCase(), {reliable:true});
+    const c = P.peer.connect('mercado-cidade-' + P.code.toLowerCase(), {reliable:true});
     P.conn = c;
     c.on('open', () => { P.tries = 0; c.send({type:'join', pid:P.pid, name:P.name}); });
     c.on('data', playerData);
     c.on('close', () => { if (P.conn === c) retry(); });
   });
   P.peer.on('error', e => {
-    if (e.type === 'peer-unavailable') { playerWait('Sala não encontrada. Confira o código ou peça para o apresentador abrir a sala. Tentando de novo…'); setTimeout(connect, 4000); }
+    if (e.type === 'peer-unavailable'){ if (!S) playerWait('Cidade não encontrada. Confira o código ou peça para o apresentador abrir a sala. Tentando de novo…'); setTimeout(connect, 4000); }
     else retry();
   });
 }
-function retry(){ P.tries++; playerWait('Conexão perdida. Reconectando…'); setTimeout(connect, Math.min(8000, 1500 * P.tries)); }
-
+function retry(){
+  P.tries++;
+  if (S && !S.done) toast('📡 Conexão com o telão caiu. Reconectando… (seu jogo continua)');
+  else if (!S) playerWait('Conexão perdida. Reconectando…');
+  setTimeout(connect, Math.min(8000, 1500 * P.tries));
+}
+function playerWait(html){
+  app.innerHTML = `<div class="phone stack" style="margin-top:20px"><p class="kick">Mercado em Jogo · Sala ${esc(P.code || '')}</p><div class="card"><p style="font-size:19px">${html}</p></div></div>`;
+}
+function renderLobby(){
+  app.innerHTML = `<div class="phone stack" style="margin-top:16px">
+    <p class="kick">Mercado em Jogo · Sala ${esc(P.code)}</p>
+    <div class="card stack center"><p style="font-size:44px">🏭</p><h2>${esc(P.name)} chegou à cidade!</h2><p class="mute">Aguarde o apresentador começar.</p></div>
+    <div class="card stack">
+      <div class="badge"><span class="ic">🏷️</span><div><b>Preço e produção</b><br><span class="mute">Ficam sempre na tela, embaixo do mapa.</span></div></div>
+      <div class="badge"><span class="ic">🗺️</span><div><b>Toque nos prédios</b><br><span class="mute">Armazém, garagem, comercial e banco têm decisões próprias.</span></div></div>
+      <div class="badge"><span class="ic">❗</span><div><b>Eventos chegam pelo mapa</b><br><span class="mute">Fornecedores, clientes e problemas aparecem durante o jogo.</span></div></div>
+      <div class="badge"><span class="ic">💰</span><div><b>12 meses, cerca de 10 minutos</b><br><span class="mute">Vence o maior lucro acumulado da sala.</span></div></div>
+    </div></div>`;
+}
 function playerData(d){
   if (!d || typeof d !== 'object') return;
-  if (d.type === 'welcome' || d.type === 'lobby') renderTutorial();
-  else if (d.type === 'round'){ P.round = d.round; if (d.done) playerSent(d.done); else renderDecide(d.round, d.secs, d.last, d.ref || {}); }
-  else if (d.type === 'ack') playerSent(d);
-  else if (d.type === 'result') renderResult(d);
-  else if (d.type === 'final') renderFinal(d);
-  else if (d.type === 'closed') playerWait('Este jogo já terminou. Aguarde o apresentador iniciar um novo.');
+  if (d.type === 'lobby'){ if (!S) renderLobby(); }
+  else if (d.type === 'start' || d.type === 'tick'){
+    const el = Number(d.el) || 0;
+    if (P.t0 == null || Math.abs(P.elapsed() - el) > 1500) P.t0 = Date.now() - el;
+    if (d.avg) { if (S) S.avg = d.avg; P.avg = d.avg; }
+    if (d.rank){ P.rank = d.rank; P.n = d.n; }
+    if (!S && el < TOTAL_MS) beginGame(el);
+  }
+  else if (d.type === 'end') showFinal(d);
+  else if (d.type === 'closed') playerWait('O jogo desta sala já terminou.');
 }
-
-function stopTimers(){ clearInterval(P.tick); clearInterval(P.fact); }
-function factTicker(){
-  let i = Math.floor(Math.random() * FACTS.length);
-  const show = () => { const el = $('fact'); if (!el){ clearInterval(P.fact); return; } el.textContent = FACTS[i++ % FACTS.length]; };
-  show(); P.fact = setInterval(show, 6000);
+function beginGame(el){
+  S = newState(); S.avg = P.avg || null;
+  S.gc = Math.floor(el / CYCLE_MS) - 1;
+  if (S.gc >= 0) S.nextEv = S.gc + 3;
+  UI.build();
+  toast('🏁 O jogo começou! Toque em ❓ Como jogar se precisar.', 4500);
+  clearInterval(P.loopT);
+  P.loopT = setInterval(() => {
+    if (!S || S.done) return;
+    const target = Math.min(G.months * G.cycles, Math.floor(P.elapsed() / CYCLE_MS));
+    let guard = 0;
+    while (S.gc < target - 1 && guard++ < 200 && !S.done){ cycle(); UI.dirty = true; }
+  }, 250);
+  clearInterval(P.statT); P.statT = setInterval(P.sendStat, 3000);
 }
-function playerWait(html, withFacts){
-  stopTimers();
-  app.innerHTML = `<div class="stack" style="max-width:520px;margin:0 auto"><p class="kick">Mercado em Jogo · Sala ${esc(P.code || '')}</p><div class="card"><p style="font-size:20px">${html}</p></div>${withFacts ? '<div class="deep ticker" id="fact"></div>' : ''}</div>`;
-  if (withFacts) factTicker();
-}
-
-function renderTutorial(){
-  stopTimers();
-  app.innerHTML = `
-  <div class="stack" style="max-width:520px;margin:0 auto">
-    <p class="kick">Mercado em Jogo · Sala ${esc(P.code)}</p>
-    <div class="card stack center pop"><p style="font-size:44px">🏭</p><h2>${esc(P.name)} está no jogo!</h2><p class="mute">Aguarde o apresentador começar. Enquanto isso, veja como jogar:</p></div>
-    <div class="card stack">
-      <div class="badge"><span class="ic">🏷️</span><div><b>1. Defina o preço do sensor</b><br><span class="mute">Preço alto dá margem, mas afasta clientes. Abaixo do piso, cada venda dá prejuízo.</span></div></div>
-      <div class="badge"><span class="ic">🤝</span><div><b>2. Escolha a ação de vendas</b><br><span class="mute">Visita técnica ou estudo de TCO custam dinheiro, mas fazem o cliente aceitar preços maiores.</span></div></div>
-      <div class="badge"><span class="ic">🔮</span><div><b>3. Use a previsão</b><br><span class="mute">O app estima quantos sensores você venderia e seu lucro antes de enviar.</span></div></div>
-      <div class="badge"><span class="ic">💰</span><div><b>4. Lucre mais que os outros</b><br><span class="mute">Lucro = margem de contribuição × sensores − custos fixos − ação de vendas.</span></div></div>
-    </div>
-    <div class="deep ticker" id="fact"></div>
-  </div>`;
-  factTicker();
-}
-
-function countdown(secs){
-  clearInterval(P.tick);
-  const end = Date.now() + secs * 1000;
-  const upd = () => { const el = $('pt'); if (!el){ clearInterval(P.tick); return; } const s = Math.max(0, Math.ceil((end - Date.now()) / 1000)); el.textContent = '⏱ ' + s + 's'; el.style.color = s <= 10 ? 'var(--bad)' : ''; };
-  upd(); P.tick = setInterval(upd, 500);
-}
-
-function renderDecide(round, secs, last, ref){
-  stopTimers();
-  const sc = SCEN[round];
-  let price = (last && last.price) || CFG.pref, es = (last && last.es) || 0;
-  const lo = 800, hi = 2600;
-  const pct = v => Math.max(0, Math.min(100, 100 * (v - lo) / (hi - lo)));
-  const pi = piso(sc.cv);
-  const zA = pct(pi), zB = pct(sc.cv / (1 - CFG.varPct - 0.2)), zC = pct(CFG.pref * 1.15), zD = pct(CFG.pref * 1.35);
-  app.innerHTML = `
-  <div class="stack" style="max-width:560px;margin:0 auto">
-    <div class="row" style="justify-content:space-between;align-items:center"><p class="kick">Rodada ${round + 1} de ${CFG.rounds}</p><span class="big-num" id="pt" style="font-size:26px"></span></div>
-    <div class="card stack"><h2>${sc.ic} ${esc(sc.t)}</h2><p class="mute">${esc(sc.d)}</p>
-      <div class="tip"><b>💡 Dica:</b> ${esc(sc.tip)}</div></div>
-    <div class="card stack">
-      <h3>🏷️ 1. Preço do sensor</h3>
-      <div class="price" id="pv"></div>
-      <div class="center"><span class="tag" id="zt"></span></div>
-      <div class="thermo" style="--a:${zA}%;--b:${zB}%;--c:${zC}%;--d:${zD}%"><i id="mk"></i></div>
-      <div class="row note" style="justify-content:space-between"><span>R$ 800</span><span>piso ${brl(pi)}</span><span>ref. ${brl(CFG.pref)}</span><span>R$ 2.600</span></div>
-      <input type="range" id="pr" min="${lo}" max="${hi}" step="10" value="${price}">
-      <div class="row" style="gap:8px"><button class="btn sm" data-d="-100">−100</button><button class="btn sm" data-d="-10">−10</button><button class="btn sm" data-d="10">+10</button><button class="btn sm" data-d="100">+100</button></div>
-    </div>
-    <div class="card stack">
-      <h3>🤝 2. Ação de engenharia de vendas</h3>
-      ${ES.map((o, i) => `<label class="opt ${i === es ? 'sel' : ''}"><input type="radio" name="es" value="${i}" ${i === es ? 'checked' : ''}><span class="ic">${o.ic}</span><span style="flex:1"><b>${esc(o.n)}</b> <span class="mute">· ${o.c ? brl(o.c) : 'grátis'}</span><br><span class="note">${esc(o.s)}</span></span></label>`).join('')}
-    </div>
-    <div class="card stack">
-      <h3>🔮 3. Previsão da sua decisão</h3>
-      <div class="kpis" id="calc"></div>
-      <p class="note">Estimativa se os concorrentes repetirem o preço médio da rodada anterior (${brl(ref.avg || CFG.pref)}). O resultado real depende do que eles fizerem!</p>
-    </div>
-    <button class="btn big" id="send">✅ Enviar decisão</button>
-    <p class="note center" id="msg"></p>
-  </div>`;
-  const pr = $('pr');
-  const calc = () => {
-    const p = Number(pr.value); price = p;
-    const z = zone(p, sc);
-    $('pv').textContent = brl(p);
-    $('zt').textContent = z.ic + ' ' + z.t; $('zt').style.background = z.c; $('zt').style.color = z.fg;
-    $('mk').style.left = pct(p) + '%';
-    const mcu = p * (1 - CFG.varPct) - sc.cv; const fx = CFG.fixed + ES[es].c;
-    const pe = mcu > 0 ? Math.ceil(fx / mcu) : null;
-    const f = forecast(p, es, sc, ref);
-    $('calc').innerHTML = `
-      <div class="kpi"><span>Margem por sensor</span><b class="${cls(mcu)}">${brl(mcu)} <span class="note">(${Math.round(100 * mcu / p)}%)</span></b></div>
-      <div class="kpi"><span>Precisa vender (equilíbrio)</span><b>${pe ? pe + ' sensores' : '—'}</b></div>
-      <div class="kpi"><span>Vendas previstas</span><b>≈ ${f.q} sensores</b></div>
-      <div class="kpi"><span>Lucro previsto</span><b class="${cls(f.lucro)}">≈ ${brl(f.lucro)}</b></div>`;
-  };
-  pr.oninput = calc;
-  document.querySelectorAll('[data-d]').forEach(b => b.onclick = () => { pr.value = Math.max(lo, Math.min(hi, Number(pr.value) + Number(b.dataset.d))); calc(); });
-  document.querySelectorAll('input[name=es]').forEach(r => r.onchange = () => {
-    es = Number(r.value);
-    document.querySelectorAll('.opt').forEach((l, i) => l.classList.toggle('sel', i === es));
-    calc();
-  });
-  $('send').onclick = () => {
-    if (P.conn && P.conn.open){ P.conn.send({type:'decision', round, price:Number(pr.value), es}); $('send').disabled = true; $('send').textContent = 'Enviando…'; }
-    else $('msg').textContent = 'Sem conexão no momento. Aguarde alguns segundos e tente de novo.';
-  };
-  calc(); countdown(secs);
-}
-
-function playerSent(d){
-  playerWait(`✅ Decisão enviada!<br><span class="mute">${brl(d.price)} · ${ES[d.es] ? ES[d.es].ic + ' ' + esc(ES[d.es].n) : ''}</span><br><br>Aguarde o resultado no telão…`, true);
-}
-
-function renderResult(d){
-  stopTimers();
-  const r = d.r;
-  const mv = d.prevPos ? d.prevPos - d.pos : 0;
-  const face = r.lucro > 15000 ? '🤑' : r.lucro > 0 ? '😄' : r.lucro > -5000 ? '😬' : '😱';
-  const trib = r.rev * CFG.varPct, cvt = r.q * r.cv;
-  app.innerHTML = `
-  <div class="stack" style="max-width:560px;margin:0 auto">
-    <p class="kick">Resultado · Rodada ${d.round + 1} de ${CFG.rounds}</p>
-    <div class="card stack center pop">
-      <p style="font-size:52px">${face}</p>
-      <p class="big-num ${cls(r.lucro)}">${brl(r.lucro)}</p>
-      <p class="mute">lucro nesta rodada</p>
-      <p style="font-size:20px"><b>${d.pos}º</b> de ${d.n} ${mv > 0 ? '<span class="good">▲ subiu ' + mv + '</span>' : mv < 0 ? '<span class="bad">▼ caiu ' + (-mv) + '</span>' : ''} · acumulado <b class="${cls(d.total)}">${brl(d.total)}</b></p>
-    </div>
-    ${d.badges.length ? `<div class="stack">${d.badges.map(b => `<div class="badge pop"><span class="ic">${b.ic}</span><b>${esc(b.t)}</b></div>`).join('')}</div>` : ''}
-    <div class="card stack">
-      <h3>De onde veio seu resultado</h3>
-      <div>
-        <div class="wf"><span>🧲 ${r.q} sensores × ${brl(r.price)}</span><b>${brl(r.rev)}</b></div>
-        <div class="wf"><span>(−) Tributos e despesas (18%)</span><span class="bad">${brl(-trib)}</span></div>
-        <div class="wf"><span>(−) Custo variável (${brl(r.cv)}/un.)</span><span class="bad">${brl(-cvt)}</span></div>
-        <div class="wf tot"><span>= Margem de contribuição</span><span class="${cls(r.mc)}">${brl(r.mc)}</span></div>
-        <div class="wf"><span>(−) Custos fixos</span><span class="bad">${brl(-CFG.fixed)}</span></div>
-        <div class="wf"><span>(−) Ação de vendas ${ES[r.es].ic}</span><span class="bad">${brl(-r.esc)}</span></div>
-        <div class="wf tot"><span>= Lucro da rodada</span><span class="${cls(r.lucro)}">${brl(r.lucro)}</span></div>
-      </div>
-      <div class="tip">${esc(tip(r))}</div>
-      ${r.auto ? '<p class="note">Você não enviou a tempo: repetimos sua decisão anterior.</p>' : ''}
-    </div>
-    <p class="mute center">${d.last ? '🏆 Olhe o telão: o pódio vem aí!' : '⏳ Aguarde a próxima rodada.'}</p>
-  </div>`;
-  if (r.lucro > 0 && d.pos === 1) confetti();
-}
-
-function renderFinal(d){
-  stopTimers();
-  const medal = ['🥇', '🥈', '🥉'][d.pos - 1] || '🏁';
-  app.innerHTML = `
-  <div class="stack center" style="max-width:560px;margin:0 auto">
-    <p class="kick">Fim de jogo</p>
-    <p style="font-size:80px" class="pop">${medal}</p>
-    <h2 style="font-size:36px">${d.pos}º lugar de ${d.n}</h2>
-    <p>Lucro acumulado: <b class="${cls(d.total)}">${brl(d.total)}</b></p>
-    ${d.awards.length ? `<div class="stack">${d.awards.map(a => `<div class="badge pop" style="text-align:left"><span class="ic">${a.ic}</span><div><b>${esc(a.t)}</b><br><span class="note">${esc(a.s)}</span></div></div>`).join('')}</div>` : ''}
-    <div class="card stack" style="text-align:left"><h3>Pódio</h3>
-      ${d.podium.map((p, i) => `<p style="font-size:18px">${['🥇', '🥈', '🥉'][i]} <b>${esc(p.name)}</b> · ${brl(p.total)}</p>`).join('')}
-    </div>
-    <p class="mute">Obrigado por jogar! 👏</p>
-  </div>`;
+function showFinal(d){
+  P.final = d;
+  if (S && !S.done) finishGame();
+  if (!S){ playerWait('O jogo terminou.'); return; }
+  const w = $('endWait'), f = $('endFinal'); if (!f) return;
+  if (w) w.remove();
+  const medal = ['🥇', '🥈', '🥉'][d.pos - 1] || '🏅';
+  f.innerHTML = `<div class="card stack">
+    <p style="font-size:60px">${medal}</p><h2>${d.pos}º lugar de ${d.n}</h2>
+    ${(d.awards || []).map(a => `<div class="badge" style="text-align:left"><span class="ic">${a.ic}</span><div><b>${esc(a.t)}</b><br><span class="note">${esc(a.s)}</span></div></div>`).join('')}
+    <div style="text-align:left">${d.podium.map((p, i) => `<p style="font-size:17px">${['🥇','🥈','🥉'][i]} <b>${esc(p.name)}</b> · ${brl(p.res)}</p>`).join('')}</div>
+  </div><p class="mute">Obrigado por jogar! 👏</p>`;
   if (d.pos <= 3) confetti();
 }
 
-/* ===================================================== */
-/* ======================  INÍCIO  ===================== */
-/* ===================================================== */
-function home(){
-  app.innerHTML = `
-  <div class="stack" style="max-width:640px;margin:32px auto">
-    <p class="kick">IFSP · Engenharia Econômica e Financeira</p>
-    <h1 style="font-size:46px">🏭 Mercado em Jogo</h1>
-    <p class="mute" style="font-size:18px">Cada participante comanda uma fábrica de sensores industriais, define preço e ação de vendas, disputa clientes e tenta terminar com o maior lucro.</p>
-    <div class="card stack">
-      <h3>📽️ Sou o apresentador</h3>
-      <p class="mute">Abra no computador ligado ao projetor.</p>
-      <button class="btn big" id="h">Abrir sala</button>
-    </div>
-    <div class="card stack">
-      <h3>📱 Vou jogar</h3>
-      <form id="j" class="row"><input type="text" id="code" maxlength="6" placeholder="Código da sala" style="flex:1;min-width:160px;text-transform:uppercase"><button class="btn" type="submit">Entrar</button></form>
-    </div>
-  </div>`;
-  $('h').onclick = startHost;
-  $('j').onsubmit = e => { e.preventDefault(); const c = $('code').value.trim().replace(/[^A-Za-z0-9]/g, ''); if (c) { history.replaceState(null, '', '?sala=' + c.toUpperCase()); startPlayer(c); } };
+/* =====================================================================
+   APRESENTADOR (telão)
+   ===================================================================== */
+const H = {code:null, peer:null, players:{}, phase:'lobby', t0:0, timer:null, news:[]};
+const hostPlayers = () => Object.values(H.players);
+const hostEl = () => H.phase === 'run' ? Date.now() - H.t0 : 0;
+function sendTo(p, msg){ if (p.conn && p.conn.open){ try { p.conn.send(msg); } catch(e){} } }
+function ranking(){ return hostPlayers().slice().sort((a, b) => (b.st ? b.st.res : -1e12) - (a.st ? a.st.res : -1e12)); }
+function avgPrice(){ const ps = hostPlayers().filter(p => p.st); return ps.length ? ps.reduce((a, p) => a + p.st.price, 0) / ps.length : null; }
+
+function startHost(){
+  if (!window.Peer){ blockedMsg(); return; }
+  H.code = rnd(4).toUpperCase();
+  app.innerHTML = `<div class="card"><p>Abrindo a cidade…</p></div>`;
+  try { H.peer = new Peer('mercado-cidade-' + H.code.toLowerCase()); } catch(e){ blockedMsg(); return; }
+  const my = H.peer;
+  setTimeout(() => { if (H.peer === my && !my.open && H.phase === 'lobby') blockedMsg(); }, 12000);
+  H.peer.on('open', () => renderHostLobby());
+  H.peer.on('connection', conn => {
+    conn.on('data', d => hostData(conn, d));
+    conn.on('close', () => { const p = H.players[conn._pid]; if (p && p.conn === conn){ p.online = false; if (H.phase === 'lobby') renderHostLobby(); } });
+  });
+  H.peer.on('disconnected', () => { try { H.peer.reconnect(); } catch(e){} });
+  H.peer.on('error', e => { if (e.type === 'unavailable-id'){ H.peer.destroy(); startHost(); } });
+}
+function hostData(conn, d){
+  if (!d || typeof d !== 'object') return;
+  if (d.type === 'join'){
+    const pid = String(d.pid || '').slice(0, 40); if (!pid) return;
+    let p = H.players[pid];
+    if (!p){
+      if (H.phase === 'final'){ try { conn.send({type:'closed'}); } catch(e){} return; }
+      p = H.players[pid] = {pid, name:String(d.name || '').trim().slice(0, 18) || 'Empresa', st:null};
+    }
+    p.conn = conn; p.online = true; conn._pid = pid;
+    if (H.phase === 'lobby'){ sendTo(p, {type:'lobby'}); renderHostLobby(); }
+    else if (H.phase === 'run') sendTo(p, {type:'start', el:hostEl(), avg:avgPrice()});
+    else if (H.phase === 'final') sendFinal(p);
+  } else if (d.type === 'stat'){
+    const p = H.players[conn._pid]; if (!p) return;
+    const n = x => Number.isFinite(Number(x)) ? Number(x) : 0;
+    p.st = {price:Math.min(5000, Math.max(0, n(d.price))), res:n(d.res), cash:n(d.cash), sold:n(d.sold), lost:n(d.lost), rep:n(d.rep), done:!!d.done};
+  }
+}
+function addBots(){
+  ['Robô Alfa', 'Robô Beta', 'Robô Gama'].forEach(n => {
+    const pid = 'bot-' + rnd(6);
+    H.players[pid] = {pid, name:n, bot:true, online:true, st:{price:ri(13, 18) * 100, res:0, cash:G.startCash, sold:0, lost:0, rep:1}};
+  });
+  renderHostLobby();
+}
+function hostStart(){
+  if (!hostPlayers().length) return;
+  H.phase = 'run'; H.t0 = Date.now(); H.lastMacro = -1;
+  hostPlayers().forEach(p => sendTo(p, {type:'start', el:0, avg:avgPrice()}));
+  renderHostRun();
+  clearInterval(H.timer);
+  H.timer = setInterval(hostTick, 1000);
+}
+function hostTick(){
+  const el = hostEl();
+  // robôs
+  hostPlayers().forEach(p => { if (p.bot){ p.st.res += ri(-3000, 9000); p.st.sold += ri(3, 8); p.st.price = Math.max(1100, Math.min(2100, p.st.price + ri(-1, 1) * 50)); } });
+  const rk = ranking(), avg = avgPrice();
+  rk.forEach((p, i) => sendTo(p, {type:'tick', el, avg, rank:i + 1, n:rk.length}));
+  if (el >= TOTAL_MS + 2500){ hostEnd(); return; }
+  renderHostRun();
+}
+function hostEnd(){
+  clearInterval(H.timer); H.phase = 'final';
+  hostPlayers().forEach(sendFinal);
+  renderPodium();
+}
+function awardsList(){
+  const ps = hostPlayers().filter(p => p.st); if (!ps.length) return [];
+  const top = f => ps.slice().sort((a, b) => f(b) - f(a))[0];
+  const a = [];
+  const r = top(p => p.st.res); a.push({pid:r.pid, ic:'💰', t:'Maior lucro', s:brl(r.st.res)});
+  const v = top(p => p.st.sold); a.push({pid:v.pid, ic:'🚚', t:'Rei das entregas', s:v.st.sold + ' sensores vendidos'});
+  const q = top(p => p.st.rep * 1000 - p.st.lost); a.push({pid:q.pid, ic:'⭐', t:'Clientes mais satisfeitos', s:'reputação ' + Math.min(100, Math.round(q.st.rep * 100)) + '%'});
+  const pr = ps.filter(p => p.st.res > 0); if (pr.length){ const m = pr.slice().sort((x, y) => y.st.price - x.st.price)[0]; a.push({pid:m.pid, ic:'💎', t:'Preço premium com lucro', s:brl(m.st.price) + ' por sensor'}); }
+  return a;
+}
+function sendFinal(p){
+  const rk = ranking(), aw = awardsList();
+  sendTo(p, {type:'end', pos:rk.indexOf(p) + 1, n:rk.length, podium:rk.slice(0, 3).map(x => ({name:x.name, res:x.st ? x.st.res : 0})), awards:aw.filter(a => a.pid === p.pid).map(a => ({ic:a.ic, t:a.t, s:a.s}))});
 }
 
+function renderHostLobby(){
+  const link = baseUrl() + '?sala=' + H.code;
+  const ps = hostPlayers();
+  app.innerHTML = `
+  <div class="host stack">
+    <p class="kick">Mercado em Jogo · Cidade ${esc(H.code)}</p>
+    <h1>Cada um administra a própria fábrica. Quem lucra mais em 12 meses?</h1>
+    ${location.protocol === 'file:' ? `<p class="warnbox">Arquivo aberto direto do computador: publique-o na internet para os celulares entrarem.</p>` : ''}
+    <div class="row">
+      <div class="card stack center" style="min-width:300px;align-items:center">
+        <p class="kick">Aponte a câmera do celular</p><div id="qr"></div>
+        <p class="note" style="word-break:break-all">${esc(link)}</p>
+        <p>Código: <b style="font-size:30px;letter-spacing:4px">${esc(H.code)}</b></p>
+      </div>
+      <div class="card stack grow">
+        <div class="row">
+          <div class="deep grow center"><p style="font-size:30px">🗺️</p><b>Uma cidade, várias fábricas</b><p class="note">Fornecedor, clientes, banco e caminhões no mapa</p></div>
+          <div class="deep grow center"><p style="font-size:30px">❗</p><b>Eventos o tempo todo</b><p class="note">Ofertas, greves, quebras, clientes grandes</p></div>
+          <div class="deep grow center"><p style="font-size:30px">⏱️</p><b>12 meses = 10 minutos</b><p class="note">Vence o maior lucro acumulado</p></div>
+        </div>
+        <h3>Empresas na cidade (${ps.length})</h3>
+        <div>${ps.map(p => `<span class="chip ${p.online ? 'ok' : ''}">${p.bot ? '🤖' : '🏭'} ${esc(p.name)}</span>`).join('') || '<span class="mute">Aguardando jogadores…</span>'}</div>
+        <div class="row"><button class="btn big" id="go" ${ps.length ? '' : 'disabled'}>▶ Começar o jogo</button><button class="btn ghost" id="bots">+ 3 robôs (teste)</button></div>
+      </div>
+    </div>
+  </div>`;
+  $('go').onclick = hostStart; $('bots').onclick = addBots;
+  const q = $('qr');
+  if (window.QRCode){ try { new QRCode(q, {text:link, width:250, height:250, correctLevel:QRCode.CorrectLevel.M}); } catch(e){ q.style.display = 'none'; } } else q.style.display = 'none';
+}
+function renderHostRun(){
+  const el = hostEl(), month = Math.min(G.months - 1, Math.floor(el / G.monthMs)), mac = macroAt(month);
+  const left = Math.max(0, TOTAL_MS - el), rk = ranking(), avg = avgPrice();
+  if (H.lastMacro !== mac.m){ H.lastMacro = mac.m; }
+  const lots = hostPlayers().map(p => {
+    const s = p.st || {res:0, price:G.pref, sold:0, rep:1};
+    return `<div class="lot ${s.res < 0 ? 'neg' : ''}"><div class="bi">${p.bot ? '🤖' : '🏭'}</div><div class="nm">${esc(p.name)}</div><div class="val">${brlK(s.res)}</div><div class="sub">🏷️ ${brl(s.price)} · 🚚 ${s.sold} · ⭐ ${Math.min(100, Math.round(s.rep * 100))}%</div></div>`;
+  }).join('');
+  app.innerHTML = `
+  <div class="host stack">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <div><p class="kick">Cidade ${esc(H.code)}</p><h1>Mês ${month + 1} de ${G.months}</h1></div>
+      <div class="center"><p class="big-num">⏱ ${Math.floor(left / 60000)}:${String(Math.floor(left / 1000) % 60).padStart(2, '0')}</p><p class="mute">preço médio da cidade: ${avg ? brl(avg) : '—'}</p></div>
+    </div>
+    <div class="tbar" style="height:10px"><i style="width:${Math.min(100, 100 * el / TOTAL_MS)}%"></i></div>
+    <div class="news"><span class="ic">${mac.ic}</span><div><p class="kick">Notícia da cidade</p><h2>${esc(mac.t)}</h2><p class="mute" style="font-size:18px">${esc(mac.d)}</p></div></div>
+    <div class="row" style="align-items:flex-start">
+      <div class="card grow" style="flex:2"><h3 style="margin-bottom:10px">🗺️ Fábricas da cidade</h3><div class="lots">${lots}</div></div>
+      <div class="card grow" style="flex:1"><h3>🏆 Ranking ao vivo</h3><ol class="rank">${rk.slice(0, 10).map((p, i) => `<li><span>${['🥇','🥈','🥉'][i] || (i + 1) + 'º'} ${esc(p.name)}</span><b class="${cls(p.st ? p.st.res : 0)}">${brlK(p.st ? p.st.res : 0)}</b></li>`).join('')}</ol>
+        <button class="btn ghost" style="margin-top:12px;width:100%" id="endNow">Encerrar agora</button></div>
+    </div>
+  </div>`;
+  $('endNow').onclick = () => { if (confirmEnd()) hostEnd(); };
+}
+function confirmEnd(){ H.endClicks = (H.endClicks || 0) + 1; if (H.endClicks < 2){ toast('Clique de novo em "Encerrar agora" para confirmar.'); setTimeout(() => H.endClicks = 0, 3000); return false; } return true; }
+function renderPodium(){
+  const rk = ranking(), aw = awardsList();
+  const col = [{bg:'#c0c7d4', h:230, i:1}, {bg:'#f0a35e', h:300, i:0}, {bg:'#b07a4f', h:180, i:2}];
+  app.innerHTML = `
+  <div class="host stack center">
+    <p class="kick">Pódio final</p><h1>As empresas que melhor administraram preço, custos e vendas</h1>
+    <div class="podium">${col.map((c, k) => { const p = rk[c.i]; if (!p) return ''; return `<div class="stepP" style="background:${c.bg};height:${c.h}px;animation-delay:${[0.8, 1.6, 0][k]}s"><div class="pos">${c.i + 1}º</div><div class="nm">${esc(p.name)}</div><div>${brl(p.st ? p.st.res : 0)}</div></div>`; }).join('')}</div>
+    <div class="row" style="justify-content:center">${aw.map(a => `<div class="badge" style="min-width:230px;text-align:left"><span class="ic">${a.ic}</span><div><b>${esc(a.t)}</b><br>${esc(H.players[a.pid].name)}<br><span class="note">${esc(a.s)}</span></div></div>`).join('')}</div>
+    <div class="card" style="text-align:left"><ol class="rank">${rk.map((p, i) => `<li><span>${i + 1}º ${esc(p.name)}</span><span>${p.st ? '🏷️ ' + brl(p.st.price) + ' · 🚚 ' + p.st.sold + ' · ' : ''}<b class="${cls(p.st ? p.st.res : 0)}">${brl(p.st ? p.st.res : 0)}</b></span></li>`).join('')}</ol></div>
+  </div>`;
+  setTimeout(confetti, 1600);
+}
+
+/* =====================================================================
+   INÍCIO
+   ===================================================================== */
+function home(){
+  app.innerHTML = `
+  <div class="phone stack" style="margin-top:28px">
+    <p class="kick">IFSP · Engenharia Econômica e Financeira</p>
+    <h1 style="font-size:42px">🏭 Mercado em Jogo</h1>
+    <p class="mute" style="font-size:17px">Administre uma fábrica de sensores numa cidade cheia de clientes, fornecedores e imprevistos.</p>
+    <div class="card stack"><h3>📽️ Sou o apresentador</h3><p class="mute">Abra no computador ligado ao projetor.</p><button class="btn big" id="h">Abrir a cidade</button></div>
+    <div class="card stack"><h3>📱 Vou jogar</h3>
+      <form id="j" class="row"><input type="text" id="code" maxlength="6" placeholder="Código da sala" style="flex:1;min-width:150px;text-transform:uppercase"><button class="btn" type="submit">Entrar</button></form></div>
+  </div>`;
+  $('h').onclick = startHost;
+  $('j').onsubmit = e => { e.preventDefault(); const c = $('code').value.trim().replace(/[^A-Za-z0-9]/g, ''); if (c){ history.replaceState(null, '', '?sala=' + c.toUpperCase()); startPlayer(c); } };
+}
 (async () => {
   await loadLibs();
   const sala = new URLSearchParams(location.search).get('sala');
   if (sala && /^[A-Za-z0-9]{2,8}$/.test(sala)) startPlayer(sala);
   else home();
 })();
-
-window.addEventListener('beforeunload', e => { if (H.peer && H.phase !== 'lobby' && H.phase !== 'final'){ e.preventDefault(); e.returnValue = ''; } });
+window.addEventListener('beforeunload', e => { if (H.peer && H.phase === 'run'){ e.preventDefault(); e.returnValue = ''; } });
 </script>
 </body>
 </html>
